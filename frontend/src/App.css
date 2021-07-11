@@ -9,6 +9,9 @@ body {
 }
 
 a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   text-decoration: none;
   color: inherit;
 }
@@ -77,7 +80,7 @@ a {
 }
 
 /* Components */
-.card {
+.card-1 {
   position: relative;
   width: 100%;
   height: -webkit-fit-content;
@@ -85,18 +88,18 @@ a {
   height: fit-content;
 }
 
-.card > * {
+.card-1 > * {
   width: 100%;
 }
 
-.card > div:first-child {
+.card-1 > div:first-child {
   padding-left: 30px;
 }
 
-.card > div:nth-child(2) {
+.card-1 > div:nth-child(2) {
   width: 100%;
   min-height: 500px;
-  padding: 15px;
+  padding: 20px;
   border-radius: 35px;
   background: -webkit-gradient(linear, left top, right bottom, from(#34373e), to(#34373e));
   background: linear-gradient(to bottom right, #34373e, #34373e);
@@ -134,7 +137,7 @@ a {
   border: solid black 1px;
 }
 
-.strip-1 > div:first-child {
+.strip-1 .content {
   height: 100%;
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
@@ -150,12 +153,12 @@ a {
   margin-right: 10px;
 }
 
-.strip-1 > div:first-child .title {
+.strip-1 .content .title {
   font: 16px Staatliches;
-  color: #B1B1B1 !important;
+  color: #b1b1b1 !important;
 }
 
-.strip-1 > div:first-child .content {
+.strip-1 .content .text {
   font: 15px Poppins;
   color: white;
   -webkit-box-flex: 1;
@@ -172,5 +175,105 @@ a {
   width: 60px;
   height: 60px;
   border-radius: 10px;
+}
+
+.strip-1_2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.strip-1_2 .strip-body {
+  position: relative;
+  max-width: 500px;
+  height: 120px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  background: -webkit-gradient(linear, left top, right top, from(#57595d), to(#363940));
+  background: linear-gradient(to right, #57595d, #363940);
+  padding: 8px 10px;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-left: 20px;
+}
+
+.strip-1_2 .strip-body > .content {
+  height: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.strip-1_2 .strip-body > .content .title {
+  font: 20px Staatliches;
+  color: #b1b1b1 !important;
+}
+
+.strip-1_2 .strip-body > .content .text {
+  font: 15px Poppins;
+  color: white;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.strip-1_2 .strip-body > .content .details {
+  font: 20px Staatliches;
+  color: #b1b1b1 !important;
+}
+
+.strip-1_2 .strip-body > img {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+}
+
+.stat-badge {
+  width: 120px;
+  height: 120px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 40px;
+  background-color: pink;
 }
 /*# sourceMappingURL=App.css.map */
