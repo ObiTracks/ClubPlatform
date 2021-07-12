@@ -9,21 +9,89 @@
   </head>
   <body>
     <div class="BACKGROUND-GRID">
-      <div class="bar-1">Navbar</div>
-      <div class="bar-2">Topbar</div>
-      <div class="bar-3">
+      <div class="structure-area-1">
+        <div class="Navbar">
+          <button class="icon icon-1" onclick="showMenu()">
+            <img src="" alt="" />
+          </button>
+          <button class="icon icon-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" />
+            </svg>
+          </button>
+        </div>
+        <div class="Menu" id="Menu">
+          <button class="menu-bucket menu-bucket-active">
+            <img src="" alt="" class="bucket-icon" />
+            <div class="title">Bucket Name</div>
+            <img src="" alt="" class="action-symbol" />
+          </button>
+          <button class="menu-bucket menu-bucket-inactive">
+            <img src="" alt="" class="bucket-icon" />
+            <div class="title">Bucket Name</div>
+            <img src="" alt="" class="action-symbol" />
+          </button>
+        </div>
+      </div>
+      <div class="structure-area-2">
+        <div class="Topbar">
+          <div></div>
+          <div>
+            <input
+              type="text"
+              id="s-bar"
+              name="searchbar"
+              class="searchbar"
+              placeholder="Search here"
+            />
+          </div>
+          <div>
+            <div class="profile-dropdown">
+              div.Profile</div>
+          </div>
+        </div>
+      </div>
+      <div class="structure-area-3">
         <div class="CONTENT-GRID">
           <div class="panel-1">
             <div class="card-1">
               <div>Generic Card</div>
               <div>
-                <a href="#">
+                <a href="#" style="margin-bottom: 10px">
                   <div class="strip-1">
                     <div class="content">
-                      <div class="title">Title</div>
+                      <div>
+                        <div class="title">Title</div>
+                        <div class="date-time">Date Time</div>
+                      </div>
                       <div class="text">
                         Lorem ipsum dolor, sit amet consectetur adipisicing
                         elit.
+                      </div>
+                    </div>
+                    <img src="" alt="" class="thumbnail" />
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="card-1">
+              <div>Generic Card</div>
+              <div>
+                <a href="#" style="margin-bottom: 10px">
+                  <div class="strip-1">
+                    <div class="content">
+                      <div>
+                        <div class="title">Title</div>
+                        <div class="date-time">Date Time</div>
+                      </div>
+                      <div class="text">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing
+                        elit. Ut
                       </div>
                     </div>
                     <img src="" alt="" class="thumbnail" />
@@ -38,11 +106,42 @@
               <div>
                 <a href="#">
                   <div class="strip-1_2">
-                    <div class="stat-badge">
+                    <div class="info-badge">
                       <div class="title">July 9</div>
                       <div class="value">1:00AM</div>
                     </div>
-                    <div class="strip-body">
+                    <div class="strip-content">
+                      <div class="content">
+                        <div class="title">Title</div>
+                        <div class="text">
+                          Lorem ipsum, dolor sit amet consectetur adipisicing
+                          elit. Cumque quo excepturi molestiae iure, a explicabo
+                          rem quia ea ut aperiam architecto, labore suscipit?
+                          Lorem ipsum dolor sit amet consectetur, adipisicing
+                          elit. Facere, quasi? Lorem ipsum, dolor sit amet
+                          consectetur adipisicing elit. Cumque quo excepturi
+                          molestiae iure, a explicabo rem quia ea ut aperiam
+                          architecto, labore suscipit? Lorem ipsum dolor sit
+                          amet consectetur, adipisicing elit. Facere, quasi?
+                        </div>
+                        <div class="details">Location   Hybrid Meeting    RSVPS</div>
+                      </div>
+                      <img src="" alt="" class="thumbnail" />
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="card-1">
+              <div>Large Card</div>
+              <div>
+                <a href="#">
+                  <div class="strip-1_2">
+                    <div class="info-badge">
+                      <div class="title">July 9</div>
+                      <div class="value">1:00AM</div>
+                    </div>
+                    <div class="strip-content">
                       <div class="content">
                         <div class="title">Title</div>
                         <div class="text">
@@ -64,4 +163,19 @@
       </div>
     </div>
   </body>
+
+  <script>
+    function showMenu() {
+      console.log("Button pressed");
+      var menu = document.getElementById("Menu");
+
+      if (menu.style.opacity == 0) {
+        menu.style.opacity = 1;
+        menu.style.display = "flex";
+      } else {
+        menu.style.opacity = 0;
+        menu.style.display = "none";
+      }
+    }
+  </script>
 </html>
