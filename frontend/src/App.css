@@ -155,6 +155,102 @@ a {
           align-items: center;
 }
 
+.Topbar > div:nth-child(3) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-right: 30px;
+}
+
+.Profile-Dropdown {
+  width: 250px;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(255, 255, 255, 0.123);
+  border: none;
+  outline: none;
+  text-decoration: none;
+}
+
+.Profile-Dropdown img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: red;
+}
+
+.Profile-Dropdown > div:nth-child(2) {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  color: white;
+  margin-left: 10px;
+}
+
+.Profile-Dropdown > div:nth-child(2) > * {
+  margin: 0;
+}
+
+.Profile-Dropdown > div:nth-child(2) #name {
+  height: 25px;
+  width: 150px;
+  display: inline-block;
+  font-family: Lato;
+  font-size: 20px;
+  font-weight: 700;
+  vertical-align: bottom;
+  text-align: left;
+}
+
+.Profile-Dropdown > div:nth-child(2) svg {
+  -ms-flex-item-align: right;
+      -ms-grid-row-align: right;
+      align-self: right;
+  width: 25px;
+  height: 25px;
+}
+
+.Profile-Dropdown > div:nth-child(2) #position {
+  width: 100%;
+  height: 15px;
+  font-family: Lato;
+  font-size: 14px;
+  font-weight: 700;
+  vertical-align: top;
+  text-align: left;
+}
+
 .Menu {
   position: fixed;
   z-index: 1;
@@ -252,7 +348,7 @@ a {
   min-width: 300px;
   width: 100%;
   max-width: 700px;
-  height: 50px;
+  height: 45px;
   border-radius: 10px;
   text-decoration: none;
   padding: 0px 20px;
@@ -361,6 +457,43 @@ a {
           flex-direction: column;
 }
 
+.card-2 {
+  position: relative;
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin-bottom: 10px;
+}
+
+.card-2 > * {
+  width: 100%;
+}
+
+.card-2 > div:first-child {
+  padding-left: 30px;
+  font-family: Mulish;
+  font-size: 20px;
+  color: white;
+  padding-bottom: 5px;
+}
+
+.card-2 > div:nth-child(2) {
+  width: 100%;
+  min-height: 300px;
+  padding: 20px;
+  border-radius: 35px;
+  background: -webkit-gradient(linear, left top, right bottom, from(#34373e), to(#34373e));
+  background: linear-gradient(to bottom right, #34373e, #34373e);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 .strip-1 {
   position: relative;
   width: 100%;
@@ -386,7 +519,7 @@ a {
   background: -webkit-gradient(linear, left top, right top, from(#57595d), to(#363940));
   background: linear-gradient(to right, #57595d, #363940);
   padding: 8px 10px;
-  border-radius: 15px;
+  border-radius: 18px;
   overflow: hidden;
 }
 
@@ -478,7 +611,7 @@ a {
   background: -webkit-gradient(linear, left top, right top, from(#57595d), to(#363940));
   background: linear-gradient(to right, #57595d, #363940);
   padding: 15px;
-  border-radius: 15px;
+  border-radius: 18px;
   margin-left: 10px;
 }
 
