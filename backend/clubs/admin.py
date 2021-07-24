@@ -7,9 +7,9 @@ from django.contrib import admin
 # Any models that need to have a customized admin, add them here. 
 # Otherwise, to add the rest automatically use the bottom for loop.
 # This tip was gotten from https://medium.com/hackernoon/automatically-register-all-models-in-django-admin-django-tips-481382cf75e5
-class ClubAdmin(admin.ModelAdmin):
-    list_display = [field.name for field in Club._meta.get_fields()]
-admin.site.register(Club, ClubAdmin)# model registered with custom admin
+# class ClubAdmin(admin.ModelAdmin):
+#     list_display = [field.name for field in Club._meta.get_fields()]
+# admin.site.register(Club, ClubAdmin)# model registered with custom admin
 
 
 # all other models
