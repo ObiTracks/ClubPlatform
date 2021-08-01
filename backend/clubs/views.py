@@ -15,3 +15,23 @@ class ClubView(viewsets.ModelViewSet):
   queryset = Club.objects.all()
   serializer_class = ClubSerializer
 
+class EventView(viewsets.ModelViewSet):
+  queryset = Event.objects.all()
+  serializer_class = EventSerializer
+
+class MemberView(viewsets.ModelViewSet):
+  queryset = Member.objects.all()
+  serializer_class = MemberSerializer
+
+class PostView(viewsets.ModelViewSet):
+  queryset = Post.objects.all()
+  serializer_class = PostSerializer
+
+class UpdateView(viewsets.ModelViewSet):
+  queryset = Update.objects.all()
+  serializer_class = UpdateSerializer
+
+class ResourceView(viewsets.ModelViewSet):
+  queryset = Resource.objects.all()
+  serializer_class = ResourceSerializer
+

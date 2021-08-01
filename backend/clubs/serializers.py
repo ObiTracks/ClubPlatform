@@ -9,4 +9,30 @@ class SchoolSerializer(serializers.HyperlinkedModelSerializer):
 class ClubSerializer(serializers.HyperlinkedModelSerializer):
   class Meta:
     model = Club
-    fields = ('id', 'url', 'name', 'email', 'who_are_we', 'mission_statement', 'vision', 'objectives', 'description')
+    fields = "__all__"
+
+class EventSerializer(serializers.HyperlinkedModelSerializer):
+  class Meta:
+    model = Event
+    fields = "__all__"
+
+class MemberSerializer(serializers.HyperlinkedModelSerializer):
+  class Meta:
+    model = Member
+    fields = "__all__"
+
+class PostSerializer(serializers.HyperlinkedModelSerializer):
+  class Meta:
+    model = Post
+    fields = "__all__"
+
+class UpdateSerializer(serializers.HyperlinkedModelSerializer):
+  class Meta:
+    model = Update
+    fields = "__all__"
+
+class ResourceSerializer(serializers.HyperlinkedModelSerializer):
+  class Meta:
+    model = Resource
+    fields = "__all__"
+
