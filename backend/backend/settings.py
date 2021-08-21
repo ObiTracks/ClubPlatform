@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'djoser',
     # 'knox',
+    'corsheaders',
     'clubs',
     'authapp',
 ]
@@ -140,4 +141,15 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSIONS_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     )
+}
+
+AUTH_USER_MODEL = 'authapp.User'
+
+DJOSER = {
+    'LOGIN_FIELD':'email',
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'SERIALIZERS':{
+        'user_create': 'authapp.serializers.UserCreateSerializer',
+        'user': 'authapp.serializers.UserCreateSerializer',
+    }, 
 }
