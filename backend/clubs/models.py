@@ -1,7 +1,9 @@
 from django.conf import settings
 from django.db import models
 from django.db.models.deletion import CASCADE, SET_NULL, DO_NOTHING
-
+from django.dispatch import receiver
+from djoser.signals import user_registered
+from authapp.models import User
 # Create your models here.
 
 class School(models.Model):
@@ -11,7 +13,7 @@ class School(models.Model):
     
     def __str__(self):
         return self.name
-    
+
 
 class Club(models.Model):
     school = models.ForeignKey(School, on_delete=models.DO_NOTHING, null=True, blank=True)
@@ -39,6 +41,7 @@ class Club(models.Model):
         return self.name
 
 class Member(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     school = models.ForeignKey(School, null=True, on_delete=models.DO_NOTHING)
     clubs = models.ManyToManyField(Club, default=None, blank=True)
 
@@ -65,6 +68,15 @@ class Member(models.Model):
 
     def __str__(self):
         return "{} {}".format(self.first_name, self.last_name)
+
+@receiver(user_registered)
+def create_profile(user, request, **kwargs):
+  user_profile = Member.objects.create(user=user, 
+  first_name=user.first_name, last_name=user.last_name)
+  print(user_profile)
+
+  # if kwargs['created']:
+  #   user_profile = 
 
 class Event(models.Model):
     club = models.ForeignKey(Club, on_delete=models.CASCADE)

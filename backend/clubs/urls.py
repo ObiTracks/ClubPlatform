@@ -5,7 +5,7 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register('schools', views.SchoolView)
-router.register('clubs', views.ClubView)
+router.register('clubs', views.ClubView, basename='club')
 router.register('events', views.EventView)
 router.register('members', views.MemberView)
 router.register('posts', views.PostView)

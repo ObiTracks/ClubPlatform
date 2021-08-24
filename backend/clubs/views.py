@@ -12,8 +12,10 @@ class SchoolView(viewsets.ModelViewSet):
   serializer_class = SchoolSerializer
 
 class ClubView(viewsets.ModelViewSet):
-  queryset = Club.objects.all()
   serializer_class = ClubSerializer
+
+  def get_queryset(self):
+    return self.request.user.member.clubs.all()[0]
 
 class EventView(viewsets.ModelViewSet):
   queryset = Event.objects.all()
