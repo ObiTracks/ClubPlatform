@@ -168,7 +168,7 @@ a {
   padding-right: 30px;
 }
 
-.Profile-Dropdown {
+.profileTab {
   width: 250px;
   height: 50px;
   display: -webkit-box;
@@ -190,14 +190,14 @@ a {
   text-decoration: none;
 }
 
-.Profile-Dropdown img {
+.profileTab img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   background-color: red;
 }
 
-.Profile-Dropdown > div:nth-child(2) {
+.profileTab > div:nth-child(2) {
   width: 100%;
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -218,11 +218,11 @@ a {
   margin-left: 10px;
 }
 
-.Profile-Dropdown > div:nth-child(2) > * {
+.profileTab > div:nth-child(2) > * {
   margin: 0;
 }
 
-.Profile-Dropdown > div:nth-child(2) #name {
+.profileTab > div:nth-child(2) #name {
   height: 25px;
   width: 150px;
   display: inline-block;
@@ -233,7 +233,7 @@ a {
   text-align: left;
 }
 
-.Profile-Dropdown > div:nth-child(2) svg {
+.profileTab > div:nth-child(2) svg {
   -ms-flex-item-align: right;
       -ms-grid-row-align: right;
       align-self: right;
@@ -241,7 +241,7 @@ a {
   height: 25px;
 }
 
-.Profile-Dropdown > div:nth-child(2) #position {
+.profileTab > div:nth-child(2) #position {
   width: 100%;
   height: 15px;
   font-family: Lato;

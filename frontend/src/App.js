@@ -4,18 +4,36 @@ import './App.css';
 import Card from './components/Card';
 import StripSmall from './components/StripSmall';
 import StripLarge from './components/StripLarge';
+import Navbar from './components/Navbar';
+import Menu from './components/Menu';
 
 function App() {
   return (
     <div className="mainGrid">
-      <div className="menuArea" id="menuArea"></div>
-      <div className="topbarArea" id="topbarArea"></div>
+      <div className="menuArea" id="menuArea">
+        <Menu />
+      </div>
+      <div className="topbarArea" id="topbarArea">
+        <Navbar />
+      </div>
       <div className="bodyArea" id="bodyArea">
 
         <div className="bodyGrid">
-          <div className="leftColumn"></div>
-          <div className="middleColumn"></div>
-          <div className="rightColumn"></div>
+          <div className="leftColumn">
+            <Card />
+            <Card />
+            <Card />
+          </div>
+          <div className="middleColumn">
+            <Card />
+            <Card />
+            <Card />
+          </div>
+          <div className="rightColumn">
+            <Card />
+            <Card />
+            <Card />
+          </div>
         </div>
 
       </div>

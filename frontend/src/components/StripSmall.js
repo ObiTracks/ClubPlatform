@@ -3,13 +3,13 @@ import React from 'react'
 export default function StripSmall() {
     return (
         <a href="#">
-            <div classNameName="smallStrip">
-                <div classNameName="container">
-                    <div classNameName="header">
-                        <div classNameName="title">Title</div>
-                        <div classNameName="date-time">Date Time</div>
+            <div className="smallStrip">
+                <div className="container">
+                    <div className="header">
+                        <div className="title">Title</div>
+                        <div className="date-time">Date Time</div>
                     </div>
-                    <div classNameName="body paragraph_font">
+                    <div className="body paragraph_font">
                         Lorem ipsum dolor, sit amet consectetur adipisicing
                         elit. Lorem ipsum dolor, sit amet consectetur adipisicing
                         elit. Lorem ipsum dolor, sit amet consectetur adipisicing
@@ -17,7 +17,7 @@ export default function StripSmall() {
                         elit.
                     </div>
                 </div>
-                <img src="" alt="" classNameName="thumbnail" />
+                <img src="" alt="" className="thumbnail" />
             </div>
         </a>
     )

@@ -1,11 +1,14 @@
 import React from 'react';
-import '../App.css';
-
+import StripSmall from './StripSmall';
+import StripLarge from './StripLarge';
 export default function Card() {
     return (
-        <div classNameName="genericCard">
+        <div className="genericCard">
             <div>Generic Card</div>
             <div>
+                <StripSmall />
+                <StripSmall />
+                <StripLarge />
                 {/* {this.props.children} */}
             </div>
         </div>

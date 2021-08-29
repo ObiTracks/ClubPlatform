@@ -14,9 +14,6 @@ class SchoolView(viewsets.ModelViewSet):
 class ClubView(viewsets.ModelViewSet):
   serializer_class = ClubSerializer
 
-  def get_queryset(self):
-    return self.request.user.member.clubs.all()[0]
-
 class EventView(viewsets.ModelViewSet):
   queryset = Event.objects.all()
   serializer_class = EventSerializer
@@ -28,6 +25,14 @@ class MemberView(viewsets.ModelViewSet):
 class PostView(viewsets.ModelViewSet):
   queryset = Post.objects.all()
   serializer_class = PostSerializer
+
+  def get_queryset(self):
+    #Params to find all posts under a club
+    # Club Id
+
+    #Params to find a specific 
+    # Post Id
+        return Foo.objects.filter(user=self.request.user)
 
 class UpdateView(viewsets.ModelViewSet):
   queryset = Update.objects.all()
