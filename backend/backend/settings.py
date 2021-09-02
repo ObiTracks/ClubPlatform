@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,14 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'rest_framework',
-    'rest_framework.authtoken',
-    'djoser',
-    # 'knox',
-    'corsheaders',
-    'clubs',
-    'authapp',
-]
+    'mainplatform',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -127,30 +121,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 # CORS_ORIGIN_WHITELIST = [
 #      'http://localhost:3000'
 # ]
 CORS_ORIGIN_ALLOW_ALL = True #Remove for production
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
-    ],
-    'DEFAULT_PERMISSIONS_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    )
-}
-
-AUTH_USER_MODEL = 'authapp.User'
-
-DJOSER = {
-    'LOGIN_FIELD':'email',
-    'USER_CREATE_PASSWORD_RETYPE': True,
-    'SERIALIZERS':{
-        'user_create': 'authapp.serializers.UserCreateSerializer',
-        'user': 'authapp.serializers.UserCreateSerializer',
-    }, 
-}
