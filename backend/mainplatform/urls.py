@@ -7,13 +7,12 @@ urlpatterns = [
     path('', views.landingpageView, name='landingpage'),
 
     # LOGIN URLS
-    path('register', views.registerView, name='register'),
+    path('signup', views.signupView, name='signup'),
     path('login', views.loginView, name='login'),
     path('logout', views.logoutView, name='logout'),
 
 
-    path('home', views.homedashboardView, name='homedashboard'),
-    path('clubs/<str:pk>/', views.clubdashboardView, name='home'),
+    path('home', views.homedashboardView, name='home'),
+    path('clubs/<str:pk>/', views.clubdashboardView, name='club'),
 
 ]
-

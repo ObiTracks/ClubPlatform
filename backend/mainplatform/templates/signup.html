@@ -26,15 +26,15 @@
             </div>
             <div class="navdiv" id="navdiv-right">
                 <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'signup' %}">Sign Up</a>
             </div>
         </nav>
         <div class="grid">
             <div>
-                <form action="">
-                    <label for="">Username</label>
-                    <input type="text">
-                    <label for="">Password</label>
-                    <input type="text">
+                <form method="POST" action="{% url 'signup' %}">
+                    {% csrf_token %}
+                    {{ register_form }}
+                    <button type="submit">Sign Up</button>
                 </form>
             </div>
         </div>

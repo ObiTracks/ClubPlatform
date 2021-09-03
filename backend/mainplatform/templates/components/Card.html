@@ -1,11 +1,11 @@
 {% load static %}
 
 <div class="genericCard">
-    <div>Generic Card</div>
+    <div>{{title}}</div>
     <div>
-        <StripSmall />
-        <StripSmall />
-        <StripLarge />
-        {/* {this.props.children} */}
+    {% for child in item %}
+        {% include 'components/StripSmall.html' with title=child.title timestamp=date%}
+
+    {% endfor %}
     </div>
-</div>
+</div>\

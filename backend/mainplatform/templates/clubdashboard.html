@@ -6,17 +6,11 @@
 {% endblock %}
 
 {% block dashboardArea %}
-<div class="mainGrid">
-    <div class="menuArea" id="menuArea">
-        <Menu />
-    </div>
-    <div class="topbarArea" id="topbarArea">
-        <Navbar />
-    </div>
-    <div class="bodyArea" id="bodyArea">
 
         <div class="bodyGrid">
             <div class="leftColumn">
+                {% include 'components/Card.html' with title="Events" item=events%}
+
                 <Card />
                 <Card />
                 <Card />
@@ -33,6 +27,4 @@
             </div>
         </div>
 
-    </div>
-</div>
 {% endblock %}

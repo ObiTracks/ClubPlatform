@@ -10,20 +10,28 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .models import *
 
-def registerView(request):
+
+def signupView(request):
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Your account has been created! You are now able to log in')
-            return redirect('home')
-    else:
-        form = UserRegisterForm()
+        register_form = UserRegisterForm(request.POST)
+        if register_form.is_valid():
+            register_form.save()
+            username = register_form.cleaned_data.get('username')
+            messages.success(
+                request, f'Your account has been created! You are now able to log in')
+            loginView(request)
 
-    return render(request, 'users/register.html', {'form': form})
-    
+            return redirect('homedashboard')
+    else:
+        register_form = UserRegisterForm()
+
+    context = {'register_form': register_form}
+
+    return render(request, '../templates/signup.html', context)
+
+
 def loginView(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -37,19 +45,16 @@ def loginView(request):
         else:
             messages.info(request, 'Username OR password is incorrect')
 
-
     context = {}
     return render(request, '../templates/login.html', context)
 
 
 def logoutView(request):
     logout(request)
-    return redirect('login')
+    return redirect('landingpage')
 
 
-    # return redirect('home')
-
-#Home Dashboard
+# Home Dashboard
 def landingpageView(request):
     context = {
     }
@@ -58,34 +63,39 @@ def landingpageView(request):
 
     return render(request, template_name, context)
 
+
 def homedashboardView(request):
-    usersClubs = request.user.profile.clubs.objects.all()
+    usersClubs = request.user.profile.clubs.all()
     allClubs = Club.objects.all()
 
     page_title = "Home"
     context = {
-        'page_title': page_title,
-        'users_clubs':usersClubs,
-        'all_clubs': allClubs
+        'page_title': usersClubs,
+        'usersClubs': usersClubs,
+        'allClubs': allClubs
     }
 
     template_name = '../templates/homedashboard.html'
+    print(request.user.first_name)
 
     return render(request, template_name, context)
 
-#Club Dashboard
+# Club Dashboard
+
+
 def clubdashboardView(request, pk):
-    club = Club.object.get(id=pk)
+    club = Club.objects.get(id=pk)
     events = club.event_set.all()[:5]
     posts = club.post_set.all()[:5]
     updates = club.update_set.all()[:5]
 
     page_title = "Home"
     context = {
+        'club': club,
         'page_title': page_title,
-        'events':events,
+        'events': events,
         'posts': posts,
-        'updates':updates
+        'updates': updates
     }
 
     template_name = '../templates/clubdashboard.html'

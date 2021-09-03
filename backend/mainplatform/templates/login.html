@@ -26,16 +26,23 @@
             </div>
             <div class="navdiv" id="navdiv-right">
                 <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'signup' %}">Sign Up</a>
             </div>
         </nav>
         <div class="grid">
             <div>
-                <form action="">
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
                     <label for="">Username</label>
-                    <input type="text">
+                    <input type="text" name="username" placeholder="Username...">
                     <label for="">Password</label>
-                    <input type="text">
+                    <input type="password" name="password" placeholder="Password...">
+                    <input type="submit" value="Login">
                 </form>
+
+                {% for message in messages %}
+                <p id="messages">{{message}}</p>
+                {% endfor %}
             </div>
         </div>
     </div>

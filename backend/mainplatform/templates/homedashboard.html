@@ -34,6 +34,12 @@ Hello Club
 
     <div class="sectionTitle">All Clubs</div>
     <div class="objectContainer">
+    
+        {% for club in allClubs %}
+            {% include 'components/Badge.html' with type="club" value=club.name%}
+        {% endfor %}
+
+        
         <div class="clubBadgeCard">
             <div>Size</div>
             <div>Club Name</div>
