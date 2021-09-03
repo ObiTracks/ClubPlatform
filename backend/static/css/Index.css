@@ -1,0 +1,107 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+}
+
+.content {
+  width: 100%;
+  min-height: 100vh;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#3968d6), to(#000000));
+  background-image: linear-gradient(#3968d6, #000000);
+}
+
+nav {
+  position: absolute;
+  top: 0;
+  background: #00b7ff;
+  height: 50px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+nav > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 0 5%;
+}
+
+.navdiv ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  list-style-type: none;
+}
+
+.navdiv ul li {
+  text-decoration: none;
+  margin: 10px;
+}
+
+.navdiv#navdiv-left {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.navdiv#navdiv-middle {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-flex: 6;
+      -ms-flex: 6;
+          flex: 6;
+}
+
+.navdiv#navdiv-right {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  background-color: red;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.grid {
+  margin-top: 50px;
+  display: -ms-grid;
+  display: grid;
+  height: 100vh;
+  -ms-grid-rows: (50vh)[3];
+      grid-template-rows: repeat(3, 50vh);
+  row-gap: 20px;
+}
+
+.grid div {
+  border: solid black 1px;
+  color: white;
+  /* background-color: green; */
+}
+
+.grid img {
+  width: 400px;
+}
+/*# sourceMappingURL=Index.css.map */
