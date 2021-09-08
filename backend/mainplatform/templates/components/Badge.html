@@ -1,17 +1,18 @@
 {% load static %}
-
 {% if type == 'info' %}
 <a href="#">
-    <div class="info-badge">
-        <div class="title">{{type}}</div>
-        <div class="value">{{value}}</div>
-    </div>
+  <div class="info-badge">
+    <div class="title">{{title}}</div>
+    <div class="value">{{value}}</div>
+  </div>
 </a>
-{% elif type == 'club' %}
-{% comment %} <a href="#"> {% endcomment %}
-<div class="club-badge" onclick="window.location='{% url 'club' club.id %}';">
-        <div class="title">{{club.date_created}}</div>
-        <div class="value">{{value  }}</div>
-    </div>
-{% comment %} </a> {% endcomment %}
-{% endif %}
+{% elif type == 'club' %} {% comment %}
+<a href="#">
+  {% endcomment %}
+  <div class="club-badge" onclick="window.location='{% url 'club' club.id %}';">
+    <div class="title">{{club.date_created}}</div>
+    <div class="value">{{value }}</div>
+  </div>
+  {% comment %}
+</a>
+{% endcomment %} {% endif %}

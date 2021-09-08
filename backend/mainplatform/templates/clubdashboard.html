@@ -1,30 +1,30 @@
-{% extends "dashboardbase.html" %}
-{% load static %}
-
+{% extends "dashboardbase.html" %} {% load static %}
 {% block extra_head %}
 <title>Home Dashboard</title>
+{% endblock %} {% block dashboardArea %}
+
+<div class="bodyGrid">
+  <div class="leftColumn">
+    {% include 'components/Card.html' with title="Events" item=events %}
+    {% include 'components/Card.html' with title="Updates" item=updates %}
+    {% include 'components/Card.html' with title="Twitter" type="widget" twittername=club.twitter_link %}
+
+  </div>
+  <div class="middleColumn">
+    {% include 'components/Card.html' with title="Posts" item=posts %}
+  </div>
+  <div class="rightColumn">
+    {% include 'components/Card.html' with title="Members" item=members type="table" %}
+    {% include 'components/Card.html' with title="Club Info" item=info type="club"%}
+
+    {% include 'components/Card.html' with title="Facebook" type="widget" facebookpagename=club.facebook_link %}
+  </div>
+
+  <div class="bottomColumn">
+      {% include 'components/Card.html' with title="Discord" type="widget" server_id=club.discord_link %}
+  </div>
+</div>
+
+
 {% endblock %}
 
-{% block dashboardArea %}
-
-        <div class="bodyGrid">
-            <div class="leftColumn">
-                {% include 'components/Card.html' with title="Events" item=events%}
-
-                <Card />
-                <Card />
-                <Card />
-            </div>
-            <div class="middleColumn">
-                <Card />
-                <Card />
-                <Card />
-            </div>
-            <div class="rightColumn">
-                <Card />
-                <Card />
-                <Card />
-            </div>
-        </div>
-
-{% endblock %}

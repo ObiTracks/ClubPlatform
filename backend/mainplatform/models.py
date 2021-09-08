@@ -7,6 +7,9 @@ from django.dispatch import receiver
 
 
 class School(models.Model):
+    class Meta:
+        ordering = ['-date_created']
+
     name = models.CharField(max_length=100)
     email = models.CharField(max_length=60)
     date_created = models.DateTimeField(auto_now=True)
@@ -16,10 +19,15 @@ class School(models.Model):
 
 
 class Club(models.Model):
+
+    class Meta:
+        ordering = ['-date_created']
+
     school = models.ForeignKey(
         School, on_delete=models.DO_NOTHING, null=True, blank=True)
 
     name = models.CharField(max_length=100)
+    abv = models.CharField(max_length=4, blank=True)
     email = models.CharField(max_length=60)
     # president = models.ForeignKey(to, on_delete)
     who_are_we = models.TextField(max_length=1000, blank=True)
@@ -35,8 +43,39 @@ class Club(models.Model):
     twitter_link = models.CharField(max_length=1000, blank=True)
     linkedin_link = models.CharField(max_length=1000, blank=True)
     shared_calendar_link = models.CharField(max_length=1000, blank=True)
-    verified = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now=True)  # Autoadd field
+
+    def get_total_members(self):
+        return self.profile_set.count()
+
+    def get_total_posts(self):
+        return self.post_set.count()
+
+    def get_total_events(self):
+        return self.event_set.count()
+
+    def get_total_updates(self):
+        return self.school
+
+    def get_school(self):
+        return self.school
+
+    def get_total_admin_members(self):
+        return self.clubprofilerelationship_set.filter(post_privledges=True).count()
+
+    def get_school_verification(self):
+        return self.clubschoolrelationship_set.first().verified
+
+    def get_club_info(self):
+        info = {
+            "Members": self.get_total_members(),
+            "Total Admin": self.get_total_admin_members(),
+            "Total Events Hosted": self.get_total_events(),
+            "School": self.get_school(),
+            "School Verified": self.get_school_verification()
+        }
+
+        return info
 
     def __str__(self):
         return self.name
@@ -57,7 +96,7 @@ class Profile(models.Model):
         ('NA', 'Not Applicable'),
     )
     ROLE = (
-        ('P', 'Profile'),
+        ('M', 'Member'),
         ('TL', 'Team Lead'),
         ('E', 'Executive'),
         ('VP', 'Vice President'),
@@ -73,18 +112,31 @@ class Profile(models.Model):
     def __str__(self):
         return "{} {}".format(self.first_name, self.last_name)
 
-# Turn this into a django signal
-# @receiver(user_registered)
-# def create_profile(user, request, **kwargs):
-#   user_profile = Profile.objects.create(user=user,
-#   first_name=user.first_name, last_name=user.last_name)
-#   print(user_profile)
 
-  # if kwargs['created']:
-  #   user_profile =
+class ClubSchoolRelationship(models.Model):
+    club = models.ForeignKey(Club, on_delete=models.CASCADE, unique=False)
+    school = models.ForeignKey(
+        School, on_delete=models.CASCADE, unique=False)
+    verified = models.BooleanField(default=False)
+
+    def __str__(self):
+        return "{} - {}".format(self.school.name, self.club.name, )
+
+
+class ClubProfileRelationship(models.Model):
+    club = models.ForeignKey(Club, on_delete=models.CASCADE, unique=False)
+    profile = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, unique=False)
+    post_privledges = models.BooleanField(default=False)
+
+    def __str__(self):
+        return "{} - {} {}".format(self.club.name, self.profile.first_name, self.profile.last_name)
 
 
 class Event(models.Model):
+    class Meta:
+        ordering = ['-date_created']
+
     club = models.ForeignKey(Club, on_delete=models.CASCADE)
     author = models.ForeignKey(Profile, on_delete=models.CASCADE, default=None)
 
@@ -93,12 +145,14 @@ class Event(models.Model):
         ('IP', 'In-Person'),
         ('R', 'Remote'),
     )
+    image = models.ImageField(default=None, blank=True)
     title = models.CharField(max_length=100)
-    date_created = models.DateTimeField(auto_now=True)
+    time = models.TimeField(default=None)
+    date = models.DateTimeField()
     short_description = models.TextField(max_length=1000)
     long_description = models.TextField(max_length=1000, blank=True)
     location = models.CharField(
-        max_length=100, blank=False, choices=LOCATION_TYPE, default='HB')
+        max_length=100, blank=False, choices=LOCATION_TYPE, default='R')
     physical_location = models.CharField(max_length=100, blank=True)
 
     # rsvps = models.ManyToManyField(to) #Many to Many relation with Profile objects to see who and how many rsvp'd
@@ -110,6 +164,9 @@ class Event(models.Model):
 
 
 class Post(models.Model):
+    class Meta:
+        ordering = ['-date_created']
+
     club = models.ForeignKey(Club, on_delete=models.CASCADE, default=None)
     author = models.ForeignKey(Profile, on_delete=models.CASCADE, default=None)
 
@@ -118,9 +175,8 @@ class Post(models.Model):
         ('IP', 'In-Person'),
         ('R', 'Remote'),
     )
+    image = models.ImageField(default=None, blank=True)
     title = models.CharField(max_length=100)
-    date = models.CharField(max_length=100, blank=True)
-    time = models.DateTimeField()
     short_description = models.CharField(max_length=100)
     long_description = models.CharField(max_length=100, blank=True)
     location = models.CharField(
@@ -133,8 +189,12 @@ class Post(models.Model):
 
 
 class Update(models.Model):
+    class Meta:
+        ordering = ['-date_created']
+
     club = models.ForeignKey(Club, on_delete=models.CASCADE, default=None)
-    event = models.ForeignKey(Event, on_delete=models.CASCADE, default=None)
+    event = models.ForeignKey(
+        Event, on_delete=models.CASCADE, default=None, blank=True)
     author = models.ForeignKey(Profile, on_delete=models.CASCADE, default=None)
 
     PRIORITY_LEVEL = (
@@ -142,8 +202,7 @@ class Update(models.Model):
         ('R', 'Regular'),
     )
     title = models.CharField(max_length=100)
-    date = models.CharField(max_length=100, blank=True)
-    time = models.DateTimeField()
+    date = models.DateTimeField(max_length=100, blank=True)
     short_description = models.CharField(max_length=100)
     long_description = models.CharField(max_length=100, blank=True)
     external_url = models.CharField(max_length=1000)
@@ -163,6 +222,9 @@ class Pod(models.Model):  # Aka team, aka sub, aka division, aka Pods
 
 
 class Resource(models.Model):
+    class Meta:
+        ordering = ['-date_created']
+
     club = models.ForeignKey(Club, on_delete=models.CASCADE, default=None)
     pod = models.ForeignKey(Pod, on_delete=models.CASCADE, default=None)
 

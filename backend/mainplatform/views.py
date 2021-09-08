@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .forms import *
 from .models import *
 
 
@@ -70,7 +70,7 @@ def homedashboardView(request):
 
     page_title = "Home"
     context = {
-        'page_title': usersClubs,
+        'page_title': page_title,
         'usersClubs': usersClubs,
         'allClubs': allClubs
     }
@@ -84,18 +84,85 @@ def homedashboardView(request):
 
 
 def clubdashboardView(request, pk):
+    profile = request.user.profile
     club = Club.objects.get(id=pk)
-    events = club.event_set.all()[:5]
-    posts = club.post_set.all()[:5]
-    updates = club.update_set.all()[:5]
+    usersClubs = profile.clubs.all()
+
+    clubrelationship = request.user.profile.clubprofilerelationship_set.filter(
+        club=club).first()
+    events = club.event_set.all()[:7]
+    posts = club.post_set.all()[:7]
+    updates = club.update_set.all()[:7]
+    members = club.profile_set.all()
+    info = club.get_club_info()
+    print(club)
+    print("Total Members: ", club.get_total_members())
+    print("Total Posts: ", club.get_total_posts())
+    print("Total Events: ", club.get_total_events())
+    print("Total Admins: ", club.get_total_admin_members())
+    print("Get School: ", club.get_school())
+    print("Get School Verification: ", club.get_school_verification())
+    # print("Get Verification: ", club.get_verification())
+    print(members)
+
+    # event_form = None
+    # post_form = None
+    # update_form = None
+
+    if request.method == 'POST':
+        form_type = request.POST.get("form_type")
+        form = None
+
+        if form_type == "club_event":
+            form = EventForm(request.POST)
+        elif form_type == "club_post":
+            form = PostForm(request.POST)
+        elif form_type == "club_update":
+            form = UpdateForm(request.POST)
+        elif form_type == "profile":
+            print(form_type)
+            form = ProfileUpdateForm(
+                request.POST, instance=request.user.profile)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Form saved')
+
+            # return redirect('club')
+    # else:
+    event_form = EventForm(initial={
+        'club': club,
+        'author': request.user.profile
+    })
+    post_form = PostForm(initial={
+        'club': club,
+        'author': request.user.profile
+    })
+    update_form = UpdateForm(initial={
+        'club': club,
+        'author': request.user.profile
+    })
+    profile_form = ProfileUpdateForm(instance=request.user.profile)
 
     page_title = "Home"
     context = {
+        'profile': profile,
         'club': club,
+
+        'clubrelationship': clubrelationship,
+        'usersClubs': usersClubs,
         'page_title': page_title,
         'events': events,
         'posts': posts,
-        'updates': updates
+        'updates': updates,
+        'members': members,
+        'info': info,
+
+        'event_form': event_form,
+        'post_form': post_form,
+        'update_form': update_form,
+        'profile_form': profile_form
+
     }
 
     template_name = '../templates/clubdashboard.html'

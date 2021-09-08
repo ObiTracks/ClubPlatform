@@ -14,56 +14,33 @@ Hello Club
 {% endfor %}
 
 <div class="sectionsContainer">
-    <div class="sectionTitle">Your Clubs</div>
-    <div class="objectContainer">
-        <div class="clubActivityCard">
-            <div>Club Name</div>
-            <div>
-                <StripSmall />
-                <StripSmall />
-            </div>
-        </div>
-        <div class="clubActivityCard">
-            <div>Club Name</div>
-            <div>
-                <StripSmall />
-                <StripSmall />
-            </div>
-        </div>
+    <div class="objectContainer clubActivities">
+        <div class="section_font_title">Your Clubs</div>
+
+        {% if allClubs %}
+        {% for club in allClubs %}
+        {% include 'components/Card.html' with title=club.name type="club" item=club %}
+        {% endfor %}
+        {% endif %}
+
     </div>
 
-    <div class="sectionTitle">All Clubs</div>
-    <div class="objectContainer">
-    
+    <div class="objectContainer clubList">
+        <div class="section_font_title">All Clubs</div>
+
         {% for club in allClubs %}
             {% include 'components/Badge.html' with type="club" value=club.name%}
         {% endfor %}
 
-        
-        <div class="clubBadgeCard">
-            <div>Size</div>
-            <div>Club Name</div>
-            <div>Category</div>
-        </div>
-        <div class="clubBadgeCard">
-            <div>Size</div>
-            <div>Club Name</div>
-            <div>Category</div>
-        </div>
-        <div class="clubBadgeCard">
-            <div>Size</div>
-            <div>Club Name</div>
-            <div>Category</div>
-        </div>
 
-        <div class="formComponent">
+        {% comment %} <div class="formComponent">
             <label>Title</label>
             <input type="text" name="" id="" />
             <label>Title</label>
             <input type="text" name="" id="" />
             <button>Submit</button>
 
-        </div>
+        </div> {% endcomment %}
     </div>
 </div>
 

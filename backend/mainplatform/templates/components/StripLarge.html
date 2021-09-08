@@ -1,18 +1,27 @@
 {% load static %}
 
-<a href="#">
+{% comment %} <a href="#" class="fullWidth"> {% endcomment %}
     <div class="largeStrip">
-        <Badge />
-        <div class="content">
+        {% comment %} {% include 'components/Badge.html' with type="info" title="Date" value=timestamp%} {% endcomment %}
+
+        <div class="details">{{club.name}}</div>
+        <div class="content ">
             <div class="container">
-                <div class="title">Title</div>
-                <div class="body paragraph_font_large">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing
-                    elit. Cumque quo excepturi
+                <div class="topic">{{topic}}Hello</div>
+                <div class="title">{{title}}</div>
+                <div class="author">
+                    <img src="" alt="">
+                    <div>
+                    {{author.name}}Hello Name</div>
                 </div>
-                <div class="details">Location Hybrid Meeting RSVPS</div>
+                <div class="body paragraph_font_large">
+                    {{content}}
+                </div>
+                <div class="body paragraph_font_large">
+                    {{longDescription}}
+                </div>
             </div>
             <img src="" alt="" class="thumbnail" />
         </div>
     </div>
-</a>
+{% comment %} </a> {% endcomment %}

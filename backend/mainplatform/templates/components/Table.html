@@ -1,0 +1,21 @@
+{% load static %}
+
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Role</th>
+  </tr>
+
+  {% if item %}
+  {% for child in item%}
+  <tr>
+    <td>{{child.first_name}}</td>
+    <td>{{child.role}}</td>
+  </tr>
+  {% endfor %}
+  {% else %}
+  <tr>
+    <td>No Members</td>
+  </tr>
+  {% endif %}
+</table>

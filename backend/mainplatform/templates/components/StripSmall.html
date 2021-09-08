@@ -1,6 +1,10 @@
 {% load static %}
 
-<a href="#">
+{% if style == "purpleborder" %}
+<a href="#" class="update_border background_purple_animated">
+{% else %}
+<a href="#" class="update_border">
+{% endif %}
     <div class="smallStrip">
         <div class="container">
             <div class="header">
@@ -8,9 +12,9 @@
                 <div class="date-time">{{timestamp}}</div>
             </div>
             <div class="body paragraph_font">
-            {{content}}
+                {{content}}
             </div>
         </div>
-        <img src="" alt="" class="thumbnail" />
+        <img src="https://source.unsplash.com/random" alt="" class="thumbnail" />
     </div>
 </a>

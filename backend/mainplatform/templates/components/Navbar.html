@@ -1,11 +1,20 @@
 {% load static %}
 
 <div class="navbar">
-    <div></div>
+    <div>
+        <div class="card_font_large">
+            {% if club %}
+            {{club.name}}
+            {% else %}
+            ClubPlatform
+            {% endif %}
+        </div>
+    </div>
+
     <div>
         <input type="text" id="s-bar" name="searchbar" class="searchbar" placeholder="Search here" />
     </div>
     <div>
-        <ProfileTab />
+        {% include 'components/ProfileTab.html' with name=profile.first_name role=profile %}
     </div>
 </div>
