@@ -1,0 +1,12 @@
+{% load static %}
+
+<div class="list-badge" onclick="window.location='{% url 'club' club.id %}';">
+    <div class="title">{{title}}</div>
+    <div class="date">{{date}}</div>
+
+    <div class="paragraph_font_small">Short Form</div>
+    <div class="content">{{short_description}}</div>
+    <div class="paragraph_font_small">Long Form</div>
+    <div class="content">{{long_description}}</div>
+    <img src="" alt="">
+</div>

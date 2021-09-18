@@ -1,5 +1,6 @@
 from django.contrib.admin.views.decorators import staff_member_required
 from django.http import Http404
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import inlineformset_factory
 from datetime import date
@@ -18,12 +19,17 @@ def signupView(request):
         register_form = UserRegisterForm(request.POST)
         if register_form.is_valid():
             register_form.save()
-            username = register_form.cleaned_data.get('username')
             messages.success(
                 request, f'Your account has been created! You are now able to log in')
-            loginView(request)
+            print("New user created")
 
-            return redirect('homedashboard')
+            username = register_form.cleaned_data.get('username')
+            password = register_form.cleaned_data.get("password1")
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('home')
     else:
         register_form = UserRegisterForm()
 
@@ -33,14 +39,18 @@ def signupView(request):
 
 
 def loginView(request):
+    if request.user.is_authenticated:
+        print("Hello")
+        return redirect('home')
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
             login(request, user)
+            print("Logged In")
             return redirect('home')
         else:
             messages.info(request, 'Username OR password is incorrect')
@@ -65,18 +75,49 @@ def landingpageView(request):
 
 
 def homedashboardView(request):
-    usersClubs = request.user.profile.clubs.all()
+    usersClubs = [
+        clubrelationship.club for clubrelationship in request.user.profile.clubprofilerelationship_set.all()]
     allClubs = Club.objects.all()
+
+    if request.method == 'POST':
+        form_type = request.POST.get("form_type")
+        form = None
+
+        if form_type == "club":
+            form = ClubForm(request.POST)
+            print(form_type)
+        elif form_type == "profile":
+            form = ProfileUpdateForm(request.POST)
+
+        print(form)
+        if form.is_valid():
+            club = form.save()
+            ClubProfileRelationship.objects.create(
+                club=club, profile=request.user.profile, is_owner=True, post_privledges=True).save()
+            print("Club Relationship added  ")
+            return redirect('home')
+        else:
+            print("Form not saved")
+            messages.success(request, f'Welcome to your new club!')
+
+            # return redirect('club')
+    # else:
+    club_form = ClubForm(initial={
+        'owner': request.user.profile
+    })
+    profile_form = ProfileUpdateForm(instance=request.user.profile)
 
     page_title = "Home"
     context = {
         'page_title': page_title,
         'usersClubs': usersClubs,
-        'allClubs': allClubs
+        'allClubs': allClubs,
+        'club_form': club_form,
+        'profile_form': profile_form
     }
 
     template_name = '../templates/homedashboard.html'
-    print(request.user.first_name)
+    # print(request.user.first_name)
 
     return render(request, template_name, context)
 
@@ -84,31 +125,21 @@ def homedashboardView(request):
 
 
 def clubdashboardView(request, pk):
-    profile = request.user.profile
+    if request.user.is_anonymous == False:
+        profile = request.user.profile
+    else:
+        profile = None
     club = Club.objects.get(id=pk)
-    usersClubs = profile.clubs.all()
+    usersClubs = [
+        clubrelationship.club for clubrelationship in request.user.profile.clubprofilerelationship_set.all()]
 
     clubrelationship = request.user.profile.clubprofilerelationship_set.filter(
         club=club).first()
     events = club.event_set.all()[:7]
     posts = club.post_set.all()[:7]
     updates = club.update_set.all()[:7]
-    members = club.profile_set.all()
+    members = club.clubprofilerelationship_set.all()
     info = club.get_club_info()
-    print(club)
-    print("Total Members: ", club.get_total_members())
-    print("Total Posts: ", club.get_total_posts())
-    print("Total Events: ", club.get_total_events())
-    print("Total Admins: ", club.get_total_admin_members())
-    print("Get School: ", club.get_school())
-    print("Get School Verification: ", club.get_school_verification())
-    # print("Get Verification: ", club.get_verification())
-    print(members)
-
-    # event_form = None
-    # post_form = None
-    # update_form = None
-
     if request.method == 'POST':
         form_type = request.POST.get("form_type")
         form = None
@@ -120,13 +151,17 @@ def clubdashboardView(request, pk):
         elif form_type == "club_update":
             form = UpdateForm(request.POST)
         elif form_type == "profile":
-            print(form_type)
             form = ProfileUpdateForm(
                 request.POST, instance=request.user.profile)
+        elif form_type == "club_relationship":
+            if clubrelationship == None:
+                form = ClubProfileRelationshipForm(
+                    request.POST)
 
         if form.is_valid():
             form.save()
             messages.success(request, f'Form saved')
+            return HttpResponseRedirect('clubs/' + pk + '/')
 
             # return redirect('club')
     # else:
@@ -143,6 +178,10 @@ def clubdashboardView(request, pk):
         'author': request.user.profile
     })
     profile_form = ProfileUpdateForm(instance=request.user.profile)
+    clubprofilerelationship_form = ClubProfileRelationshipForm(initial={
+        'club': club,
+        'profile': profile
+    })
 
     page_title = "Home"
     context = {
@@ -161,10 +200,62 @@ def clubdashboardView(request, pk):
         'event_form': event_form,
         'post_form': post_form,
         'update_form': update_form,
-        'profile_form': profile_form
-
+        'profile_form': profile_form,
+        'clubprofilerelationship_form': clubprofilerelationship_form
     }
 
     template_name = '../templates/clubdashboard.html'
+
+    return render(request, template_name, context)
+
+
+def eventsView(request, pk):
+    club = Club.objects.get(id=pk)
+    events = club.event_set.all()
+    print(events)
+
+    page_title = "Events"
+    context = {
+        'page_title': page_title,
+        'club': club,
+        'list': events
+
+    }
+
+    template_name = '../templates/listView.html'
+
+    return render(request, template_name, context)
+
+
+def postsView(request, pk):
+    club = Club.objects.get(id=pk)
+    posts = club.event_set.all()
+
+    page_title = "Posts"
+    context = {
+        'page_title': page_title,
+        'club': club,
+        'list': posts
+
+    }
+
+    template_name = '../templates/listView.html'
+
+    return render(request, template_name, context)
+
+
+def updatesView(request, pk):
+    club = Club.objects.get(id=pk)
+    updates = club.event_set.all()
+
+    page_title = "Updates"
+    context = {
+        'page_title': page_title,
+        'club': club,
+        'list': updates
+
+    }
+
+    template_name = '../templates/listView.html'
 
     return render(request, template_name, context)

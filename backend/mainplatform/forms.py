@@ -34,9 +34,16 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = "__all__"
+        exclude = ('clubs',)
 
 
-# Club event, post and update forms
+# Club, event, post and update forms
+class ClubForm(forms.ModelForm):
+    class Meta:
+        model = Club
+        fields = "__all__"
+
+
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
@@ -59,3 +66,9 @@ class UpdateForm(forms.ModelForm):
         widgets = {
             'date': forms.DateTimeInput(format=('%m/%d/%Y'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
         }
+
+
+class ClubProfileRelationshipForm(forms.ModelForm):
+    class Meta:
+        model = ClubProfileRelationship
+        fields = ['club', 'profile']

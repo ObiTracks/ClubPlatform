@@ -19,15 +19,18 @@ class School(models.Model):
 
 
 class Club(models.Model):
-
     class Meta:
         ordering = ['-date_created']
 
+    owner = models.ForeignKey('Profile', unique=False,
+                              on_delete=DO_NOTHING, default=None)
     school = models.ForeignKey(
         School, on_delete=models.DO_NOTHING, null=True, blank=True)
 
     name = models.CharField(max_length=100)
     abv = models.CharField(max_length=4, blank=True)
+    image = models.ImageField(default=None, blank=True)
+
     email = models.CharField(max_length=60)
     # president = models.ForeignKey(to, on_delete)
     who_are_we = models.TextField(max_length=1000, blank=True)
@@ -61,10 +64,15 @@ class Club(models.Model):
         return self.school
 
     def get_total_admin_members(self):
-        return self.clubprofilerelationship_set.filter(post_privledges=True).count()
+        adminset = self.clubprofilerelationship_set.filter(
+            post_privledges=True)
+        if adminset:
+            return adminset.count()
 
     def get_school_verification(self):
-        return self.clubschoolrelationship_set.first().verified
+        schoolrelationship = self.clubschoolrelationship_set.first()
+        if schoolrelationship:
+            return schoolrelationship.verified
 
     def get_club_info(self):
         info = {
@@ -85,7 +93,6 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     school = models.ForeignKey(
         School, null=True, blank=True, on_delete=models.DO_NOTHING)
-    clubs = models.ManyToManyField(Club, default=None, blank=True)
 
     YEAR_LEVEL = (
         ('1', 'First'),
@@ -95,18 +102,11 @@ class Profile(models.Model):
         ('5', 'Fifth'),
         ('NA', 'Not Applicable'),
     )
-    ROLE = (
-        ('M', 'Member'),
-        ('TL', 'Team Lead'),
-        ('E', 'Executive'),
-        ('VP', 'Vice President'),
-        ('P', 'President'),
-    )
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
     year_level = models.CharField(
         max_length=40, choices=YEAR_LEVEL, default='M')
-    role = models.CharField(max_length=40, choices=ROLE, default='M')
+
     date_created = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -118,6 +118,7 @@ class ClubSchoolRelationship(models.Model):
     school = models.ForeignKey(
         School, on_delete=models.CASCADE, unique=False)
     verified = models.BooleanField(default=False)
+    date_created = models.DateTimeField(auto_now=True)  # Autoadd field
 
     def __str__(self):
         return "{} - {}".format(self.school.name, self.club.name, )
@@ -128,6 +129,18 @@ class ClubProfileRelationship(models.Model):
     profile = models.ForeignKey(
         Profile, on_delete=models.CASCADE, unique=False)
     post_privledges = models.BooleanField(default=False)
+    is_owner = models.BooleanField(default=False)
+    date_created = models.DateTimeField(auto_now=True)  # Autoadd field
+
+    ROLE = (
+        ('M', 'Member'),
+        ('TL', 'Team Lead'),
+        ('S', 'Staff'),
+        ('E', 'Executive'),
+        ('VP', 'Vice President'),
+        ('P', 'President'),
+    )
+    role = models.CharField(max_length=40, choices=ROLE, default='M')
 
     def __str__(self):
         return "{} - {} {}".format(self.club.name, self.profile.first_name, self.profile.last_name)
@@ -147,8 +160,7 @@ class Event(models.Model):
     )
     image = models.ImageField(default=None, blank=True)
     title = models.CharField(max_length=100)
-    time = models.TimeField(default=None)
-    date = models.DateTimeField()
+    date = models.DateTimeField(blank=True, default=None)
     short_description = models.TextField(max_length=1000)
     long_description = models.TextField(max_length=1000, blank=True)
     location = models.CharField(
@@ -177,15 +189,15 @@ class Post(models.Model):
     )
     image = models.ImageField(default=None, blank=True)
     title = models.CharField(max_length=100)
-    short_description = models.CharField(max_length=100)
+    short_description = models.CharField(max_length=100, blank=True)
     long_description = models.CharField(max_length=100, blank=True)
     location = models.CharField(
         max_length=150, blank=True, choices=LOCATION_TYPE)
-    url = models.CharField(max_length=1000)
+    url = models.CharField(max_length=1000, blank=True)
     date_created = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "{}".format(self.title, self.date)
+        return ("{}".format(self.title, self.date))
 
 
 class Update(models.Model):
@@ -198,14 +210,15 @@ class Update(models.Model):
     author = models.ForeignKey(Profile, on_delete=models.CASCADE, default=None)
 
     PRIORITY_LEVEL = (
+        # ('VH', 'Very High'),
         ('H', 'High'),
         ('R', 'Regular'),
     )
     title = models.CharField(max_length=100)
-    date = models.DateTimeField(max_length=100, blank=True)
+    date = models.DateTimeField(max_length=100, blank=True, null=True)
     short_description = models.CharField(max_length=100)
     long_description = models.CharField(max_length=100, blank=True)
-    external_url = models.CharField(max_length=1000)
+    url = models.CharField(max_length=1000, blank=True)
     priority_level = models.CharField(
         max_length=150, blank=True, choices=PRIORITY_LEVEL, default='R')
     date_created = models.DateTimeField(auto_now=True)
@@ -219,6 +232,7 @@ class Pod(models.Model):  # Aka team, aka sub, aka division, aka Pods
     community_drive_url = models.CharField(max_length=100, blank=True)
     repo_url = models.CharField(max_length=100, blank=True)
     external_url = models.CharField(max_length=100, blank=True)
+    date_created = models.DateTimeField(auto_now=True)  # Autoadd field
 
 
 class Resource(models.Model):

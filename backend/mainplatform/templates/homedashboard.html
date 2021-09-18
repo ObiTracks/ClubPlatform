@@ -15,12 +15,16 @@ Hello Club
 
 <div class="sectionsContainer">
     <div class="objectContainer clubActivities">
+
+        <button class="formButton" id="showFormBtn" onclick="showForm('clubForm')">Create Your Own Club</button>
         <div class="section_font_title">Your Clubs</div>
 
         {% if allClubs %}
-        {% for club in allClubs %}
-        {% include 'components/Card.html' with title=club.name type="club" item=club %}
-        {% endfor %}
+            {% for club in allClubs %}
+                {% include 'components/Card.html' with title=club.name type="club" item=club %}
+            {% endfor %}
+        {% else %}
+            <div class="paragraph_font_large">Your not a part of any clubs, so join or make one!</div>
         {% endif %}
 
     </div>
@@ -28,19 +32,13 @@ Hello Club
     <div class="objectContainer clubList">
         <div class="section_font_title">All Clubs</div>
 
-        {% for club in allClubs %}
-            {% include 'components/Badge.html' with type="club" value=club.name%}
-        {% endfor %}
-
-
-        {% comment %} <div class="formComponent">
-            <label>Title</label>
-            <input type="text" name="" id="" />
-            <label>Title</label>
-            <input type="text" name="" id="" />
-            <button>Submit</button>
-
-        </div> {% endcomment %}
+        {% if allClubs %}
+            {% for club in allClubs %}
+                {% include 'components/Badge.html' with type="club" value=club.name%}
+            {% endfor %}
+        {% else %}
+            <div class="paragraph_font_large">Nothing To Show Here So Create Your Own Club!</div>
+        {% endif %}
     </div>
 </div>
 

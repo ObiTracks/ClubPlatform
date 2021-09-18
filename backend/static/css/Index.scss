@@ -1,27 +1,36 @@
+@import url("https://fonts.googleapis.com/css?family=Mulish:700,800|Lato:700,800,900|Poppins:700,500,600|Staatliches:400|Inter:400,500,600,700,800");
+
 // #Styling for the landing page
 body {
   margin: 0;
   padding: 0;
-  background-color: black;
+  background: linear-gradient(#22252C, #000000);
 }
 
 .content {
   width: 100%;
   min-height: 100vh;
   height: fit-content;
-  background-image: linear-gradient(#3968d6, #000000);
+  // background-image: linear-gradient(#3968d6, #000000);
+}
+
+a {
+  color: white;
+  text-decoration: none;
 }
 
 nav {
-  position: absolute;
   top: 0;
-  background: rgb(0, 183, 255);
-  height: 50px;
+  // height: fit-content;
   width: 100%;
   display: flex;
   justify-content: space-between;
 
-  > div {
+  font: 18px Poppins;
+  text-decoration: none;
+  color: white;
+
+  >div {
     display: flex;
     align-items: center;
     flex: 1;
@@ -40,6 +49,7 @@ nav {
       margin: 10px;
     }
   }
+
   &#navdiv-left {
     justify-content: flex-start;
     flex: 1;
@@ -49,26 +59,164 @@ nav {
     justify-content: center;
     flex: 6;
   }
+
   &#navdiv-right {
     justify-content: flex-end;
-    background-color: red;
+    // background-color: red;
     flex: 1;
   }
 }
 
 .grid {
-  margin-top: 50px;
   display: grid;
-  height: 100vh;
-  grid-template-rows: repeat(3, 50vh);
+  min-height: 100vh;
+  grid-template-rows: repeat(3, fit-content);
   row-gap: 20px;
-  div {
-    border: solid black 1px;
+  overflow: hidden;
+
+  >div {
+    // border: solid rgb(255, 0, 0) 3px;
     color: white;
     /* background-color: green; */
   }
+
   img {
     width: 400px;
     // background: red;
+  }
+}
+
+#firstSection {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10vh;
+
+  height: 120vh;
+
+  >div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    // border: solid rgb(66, 66, 66) 1px;
+    text-decoration: none;
+  }
+
+
+  #hookLine {
+    width: 100%;
+    font: 250% Inter;
+
+    background: -webkit-linear-gradient(0deg, #08F0E2, #FFA6F6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  #backgroundMeet {
+    position: absolute;
+    top: 18%;
+    width: 100%;
+    font: 1100% Inter;
+    font-weight: 700;
+    color: #57585C;
+    letter-spacing: -8px;
+
+    background: -webkit-linear-gradient(90deg, #57585C, #22252C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  #backgroundTitle {
+    position: absolute;
+    top: 70%;
+    width: 100%;
+    font: 1600% Lato;
+    font-weight: 800;
+    color: #57585C;
+    letter-spacing: -3px;
+
+    background: -webkit-linear-gradient(90deg, #57585C, #22252C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  #foregroundTitle {
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    font: 1300% Lato;
+    font-weight: 500;
+    color: #57585C;
+    letter-spacing: -3px;
+
+    background: -webkit-linear-gradient(0deg, #08F0E2, #FFA6F6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  #introImage {
+    position: absolute;
+    top: 50%;
+    width: 60%;
+
+    // border: solid blue 2px;
+  }
+
+}
+
+#secondSection {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 15vh;
+
+  height: 120vh;
+
+  // >div {
+  //   display: flex;
+  //   flex-direction: column;
+  //   text-align: center;
+  //   align-items: center;
+  //   justify-content: center;
+  //   border: solid rgb(66, 66, 66) 1px;
+  //   text-decoration: none;
+  // }
+
+
+  #hookLine {
+    width: 70%;
+    font: 300% Inter;
+    background: -webkit-linear-gradient(0deg, #08F0E2, #FFA6F6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  #content {
+    width: 60%;
+    font: 150% Inter;
+    color: #7797A1;
+    text-align: center;
+  }
+
+  .integratedPlatforms {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    >img {
+      // border: solid red 1px;
+      width: 15%;
+      margin: 10px;
+
+    }
   }
 }

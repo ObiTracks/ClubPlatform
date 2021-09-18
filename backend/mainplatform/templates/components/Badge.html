@@ -6,6 +6,13 @@
     <div class="value">{{value}}</div>
   </div>
 </a>
+{% elif type == 'list' %}
+  <div class="list-badge" onclick="window.location='{% url 'club' club.id %}';">
+    <div class="title">{{club.date_created}}</div>
+    <div class="date">{{value}}</div>
+    <div class="content">{{content}}</div>
+    <img src="" alt="">
+  </div>
 {% elif type == 'club' %} {% comment %}
 <a href="#">
   {% endcomment %}
@@ -15,4 +22,5 @@
   </div>
   {% comment %}
 </a>
-{% endcomment %} {% endif %}
+{% endcomment %} 
+{% endif %}

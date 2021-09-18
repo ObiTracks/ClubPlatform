@@ -2,7 +2,8 @@
 
 <div class="genericCard"> 
 
-  <div class="card_font_large">{{title}}
+  <div class="card_font_large">
+    {{title}}
 
     {% if clubrelationship.post_privledges == True %}
       {% if title == 'Events' %}
@@ -15,58 +16,55 @@
     {% endif %}
   </div>
 
-  {% if title == "Posts" %}
+  {% if type == "List" %}
+  <div class="listView">
+  {% elif title == "Posts" %}
   <div class="spectrum-background"> 
   {% else %}
-  <div >
+  <div>
   {% endif %}
 
-    {% if type == 'table'%} 
-      {% include 'components/Table.html' with item=members %} 
-    {% elif type == 'widget'%} 
-        {% if twittername %}
-            <a
-              class="twitter-timeline"
-              data-height="500"
-              data-theme="dark"
-              href="https://twitter.com/{{twittername}}?ref_src=twsrc%5Etfw"
-              >{{club.name}}</a
-            >
-            <script
-              async
-              src="https://platform.twitter.com/widgets.js"
-              charset="utf-8"
-            ></script>
+  {% if type == 'table'%} 
+    {% include 'components/Table.html' with item=members %} 
+  {% elif type == 'widget'%} 
+      {% if twittername %}
+          <a
+            class="twitter-timeline"
+            data-height="500"
+            data-theme="dark"
+            href="https://twitter.com/{{twittername}}?ref_src=twsrc%5Etfw"
+            >{{club.name}}</a
+          >
+          <script
+            async
+            src="https://platform.twitter.com/widgets.js"
+            charset="utf-8"
+          ></script>
 
-        {% elif facebookpagename%}
+      {% elif facebookpagename%}
 
-          <iframe
-            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F{{facebookpagename}}&tabs=timeline%2Cevents%2Cmessages&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
-            height="500"
-            style="border: none; overflow: hidden"
-            scrolling="no"
-            frameborder="0"
-            allowfullscreen="true"
-            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-          ></iframe>
-        {% elif server_id%}
-           <iframe src="https://discord.com/widget?id={{server_id}}&&theme=dark" width="100%" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">Wtf</iframe>
-        {% else %}
+        <iframe
+          src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F{{facebookpagename}}&tabs=timeline%2Cevents%2Cmessages&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+          height="500"
+          style="border: none; overflow: hidden"
+          scrolling="no"
+          frameborder="0"
+          allowfullscreen="true"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        ></iframe>
+      {% elif server_id%}
+          <iframe src="https://discord.com/widget?id={{server_id}}&&theme=dark" width="100%" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">Wtf</iframe>
+      {% else %}
 
-            <div class="paragraph_font_large">Nothing To Show Here</div>
-        {% endif %} 
+          <div class="paragraph_font_large">Nothing To Show Here</div>
+      {% endif %} 
     
     {% elif title == "Club Info"%}
-      {% for key, value in info.items %}
-        {% include 'components/Badge.html' with type="info" title=key value=value %}
-      {% endfor %}
-    {% comment %} {{club.fields.items}}
-    {% for field in club.get_all_fields %}
-        {% include 'components/Badge.html' with title=club.event_set.all.first.title timestamp=club.event_set.all.first.date content=club.event_set.all.first.short_description%} 
-
-        {{ field.label }}
-    {% endfor %} {% endcomment %}
-
+      <div class="cardGrid">
+        {% for key, value in info.items %}
+          {% include 'components/Badge.html' with type="info" title=key value=value %}
+        {% endfor %}
+      </div>
 
     {% elif type == 'club'%} 
       {% with club as item %} 
@@ -83,6 +81,10 @@
             <div class="paragraph_font_large">Nothing To Show Here</div>
         {% endif %} 
       {% endwith %} 
+    {% elif type == 'List'%}
+        {% for object in item %}
+          {% include 'components/ListItem.html' with title=object.title date=object.date short_description=object.short_description long_description=object.long_description %}
+        {% endfor %}
     {% else %} 
       {% if item %}
         {% for child in item %} 

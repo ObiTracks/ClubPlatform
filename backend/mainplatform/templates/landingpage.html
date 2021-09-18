@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static '/css/Index.css' %}">
+    <link rel="stylesheet" href="/Users/oihejirika/dev/ClubPlatform/backend/static/css/Index.css">
     <title>Document</title>
 
 
@@ -30,15 +31,36 @@
             </div>
         </nav>
         <div class="grid">
-            <div>
-                <p>Tired of having no home for your club? <b>So are we.</b></p>
-                <h1>Meet</h1>
-                <h1>ClubPlatform</h1>
-                <h2>ClubPlatform</h2>
-                <img src="{% static 'images/macbookprodesign.png' %}">
+            <div id="firstSection">
+                <div id="hookLine">Tired of having no home for your club?<br><b>So are we.</b></div>
+                <div id="backgroundMeet">Meet</div>
+                {% comment %} <div id="backgroundTitle">ClubPlatform</div> {% endcomment %}
+                <div id="foregroundTitle">ClubPlatform</div>
+                <img id="introImage" src="{% static 'images/macbookprodesign.png' %}">
             </div>
-            <div>Hello</div>
-            <div>Hello</div>
+            <div id="secondSection">
+                <div id="hookLine"> Engage and Organize your community <br> using all the platforms you already use.</div>
+                <div id="content">Experience the simplicity of a hub experience for your community and integration with the platforms you love and use most.</div>
+                <div class="integratedPlatforms">
+                
+                    <img src="{% static 'images/slacklogo.png' %}">
+                    <img src="{% static 'images/discordlogo.png' %}">
+                    <img src="{% static 'images/fblogo.png' %}">
+                    <img src="{% static 'images/iglogo.png' %}">
+                </div>
+            </div>
+            <div id="thirdSection">
+                <div id="hookLine"> Engage and Organize your community <br> using all the platforms you already use.</div>
+                <div id="content">Experience the simplicity of a hub experience for your community and integration with the platforms you love and use most.</div>
+                <div class="integratedPlatforms">
+                
+                    <img src="{% static 'images/slacklogo.png' %}">
+                    <img src="{% static 'images/discordlogo.png' %}">
+                    <img src="{% static 'images/fblogo.png' %}">
+                    <img src="{% static 'images/iglogo.png' %}">
+                </div>
+            </div>
+            {% comment %} <div>Hello</div> {% endcomment %}
         </div>
     </div>
 </body>

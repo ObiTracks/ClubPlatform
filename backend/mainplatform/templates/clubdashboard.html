@@ -2,8 +2,12 @@
 {% block extra_head %}
 <title>Home Dashboard</title>
 {% endblock %} {% block dashboardArea %}
+    {% if clubrelationship == None %}
+      <button class="formButton" id="showFormBtn" onclick="showForm('clubrelationshipForm')">Join Club</button>
+    {% endif %}
 
 <div class="bodyGrid">
+
   <div class="leftColumn">
     {% include 'components/Card.html' with title="Events" item=events %}
     {% include 'components/Card.html' with title="Updates" item=updates %}

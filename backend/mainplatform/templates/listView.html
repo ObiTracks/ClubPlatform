@@ -1,0 +1,16 @@
+{% extends "dashboardbase.html" %} {% load static %}
+{% block extra_head %}
+<title>Home Dashboard</title>
+{% endblock %} 
+{% block dashboardArea %}
+
+
+<div class="listViewGrid">
+  <div class="firstRow">
+      {% include 'components/Card.html' with title=page_title  type="List" item=list %}
+  </div>
+</div>
+
+
+{% endblock %}
+

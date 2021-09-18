@@ -1,6 +1,6 @@
 {% load static %}
 
-<button class="profileTab" onclick="showForm('profileForm')">
+<div class="profileTab" onclick="showForm('profileForm')">
     <div class="body">
         <div class="name">{{user.profile.first_name}}</div>
         {% comment %} <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24">
@@ -9,4 +9,4 @@
         <div id="position">{{user.profile.get_role_display}}</div>
     </div>
     <img src="" alt="" />
-</button>
+</div>

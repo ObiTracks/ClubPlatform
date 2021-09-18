@@ -14,5 +14,7 @@ urlpatterns = [
 
     path('home', views.homedashboardView, name='home'),
     path('clubs/<str:pk>/', views.clubdashboardView, name='club'),
-
+    path('clubs/<str:pk>/events', views.eventsView, name='events'),
+    path('clubs/<str:pk>/posts', views.postsView, name='posts'),
+    path('clubs/<str:pk>/updates', views.updatesView, name='updates'),
 ]

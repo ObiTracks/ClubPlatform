@@ -24,7 +24,6 @@
     </div>
     <div class="topbarArea" id="topbarArea">
       {% include 'components/Navbar.html' %}
-      
     </div>
     <div class="bodyArea" id="bodyArea">
 
@@ -72,54 +71,29 @@
 
         <button class="paragraph_font background_purple_animated">Submit</button>
       </form>
+
+      <form action="" method="POST" class="formComponent" id="clubForm">
+        <a href={% url 'logout' %} class="paragraph_font" style="color: white; position: absolute; top: 20px; right: 20px;">Logout</a>
+        {% csrf_token %}
+        {{club_form}}
+        <input type="hidden" name="form_type" value="club">
+        {% comment %} <input type="text" placeholder="placeholder" class="paragraph_font"> {% endcomment %}
+
+        <button class="paragraph_font background_purple_animated">Submit</button>
+      </form>
+
+      <form action="" method="POST" class="formComponent" id="clubrelationshipForm">
+        <a href={% url 'logout' %} class="paragraph_font" style="color: white; position: absolute; top: 20px; right: 20px;">Logout</a>
+        {% csrf_token %}
+        {{clubprofilerelationship_form}}
+        <input type="hidden" name="form_type" value="club_relationship">
+        {% comment %} <input type="text" placeholder="placeholder" class="paragraph_font"> {% endcomment %}
+
+        <button class="paragraph_font background_purple_animated">Submit</button>
+      </form>
   </div>
 </body>
-
-<script>
-  function showMenu() {
-    console.log("Button pressed");
-    var menu = document.getElementById("Menu");
-
-    if (menu.style.opacity == 0) {
-      menu.style.opacity = 1;
-      menu.style.display = "flex";
-    } else {
-      menu.style.opacity = 0;
-      menu.style.display = "none";
-    }
-
-  }
-
-  function showForm(formName){
-    var form = document.getElementById(formName);
-    form.style.display = "flex";
-
-    var modal = document.getElementById("formModal");
-    modal.style.display = "flex";
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-
-        form.style.display = "none";
-        modal.style.display = "none";
-      }
-    }
-  }
-
-  {% comment %} function showForm(){
-    var modal = document.getElementById("formModal");
-    modal.style.display = "flex";
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-
-        modal.style.display = "none";
-      }
-    }
-  } {% endcomment %}
-</script>
+<script src="{% static 'js/script.js' %}"></script>
 
 {% block footer %}{% endblock %}
 
