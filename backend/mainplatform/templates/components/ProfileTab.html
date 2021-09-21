@@ -2,11 +2,13 @@
 
 <div class="profileTab" onclick="showForm('profileForm')">
     <div class="body">
-        <div class="name">{{user.profile.first_name}}</div>
+        <div class="name">{{user.profile.first_name}} {{user.profile.last_name}}</div>
         {% comment %} <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24">
             <path d="M0 7.33l2.829-2.83 9.175 9.339 9.167-9.339 2.829 2.83-11.996 12.17z" />
         </svg> {% endcomment %}
-        <div id="position">{{user.profile.get_role_display}}</div>
+        {% if club %}
+            <div id="position">{{clubrelationship.get_role_display}}</div>
+        {% endif %}
     </div>
     <img src="" alt="" />
 </div>

@@ -7,10 +7,10 @@
   </tr>
 
   {% if item %}
-  {% for child in item%}
+  {% for profile, relationship in item%}
   <tr>
-    <td>{{child.first_name}}</td>
-    <td>{{child.role}}</td>
+    <td>{{profile}}</td>
+    <td>{{relationship.get_role_display}}</td>
   </tr>
   {% endfor %}
   {% else %}

@@ -35,6 +35,15 @@
 
   <div class="modal" id="formModal">
 
+      <form action="" method="POST" class="formComponent"  id="clubUpdateForm">
+        {% csrf_token %}
+        {{event_form}}
+        <input type="hidden" name="form_type" value="club_event">
+        {% comment %} <input type="text" placeholder="placeholder" class="paragraph_font"> {% endcomment %}
+
+        <button class="paragraph_font background_purple_animated">Submit</button>
+      </form>
+
       <form action="" method="POST" class="formComponent"  id="eventForm">
         {% csrf_token %}
         {{event_form}}
@@ -94,6 +103,7 @@
   </div>
 </body>
 <script src="{% static 'js/script.js' %}"></script>
+
 
 {% block footer %}{% endblock %}
 

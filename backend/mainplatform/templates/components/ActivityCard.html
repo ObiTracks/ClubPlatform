@@ -1,0 +1,22 @@
+{% load static %}
+
+<div class="activityCard"> 
+
+  <div class="card_font_large">
+    {{title}}
+
+    {% if clubrelationship.post_privledges == True %}
+      {% if title == 'Events' %}
+        <button class="formButton" id="showFormBtn" onclick="showForm('eventForm')">Create Event+</button>
+      {% elif title == 'Posts' %}
+        <button class="formButton" id="showFormBtn" onclick="showForm('postForm')">Create Post+</button>
+      {% elif title == 'Updates' %}
+        <button class="formButton" id="showFormBtn" onclick="showForm('updateForm')">Create Update+</button>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  
+  <div class="spectrum-background"> 
+  </div>
+</div>

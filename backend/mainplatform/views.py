@@ -85,16 +85,19 @@ def homedashboardView(request):
 
         if form_type == "club":
             form = ClubForm(request.POST)
-            print(form_type)
         elif form_type == "profile":
-            form = ProfileUpdateForm(request.POST)
+            form = ProfileUpdateForm(
+                request.POST, instance=request.user.profile)
 
-        print(form)
-        if form.is_valid():
+        if form.is_valid() and form_type != "profile":
             club = form.save()
             ClubProfileRelationship.objects.create(
                 club=club, profile=request.user.profile, is_owner=True, post_privledges=True).save()
-            print("Club Relationship added  ")
+            print("Option A - Club Relationship added  ")
+            return redirect('home')
+        elif form.is_valid():
+            print("Option B")
+            form.save()
             return redirect('home')
         else:
             print("Form not saved")
@@ -113,7 +116,8 @@ def homedashboardView(request):
         'usersClubs': usersClubs,
         'allClubs': allClubs,
         'club_form': club_form,
-        'profile_form': profile_form
+        'profile_form': profile_form,
+        'club': None
     }
 
     template_name = '../templates/homedashboard.html'
@@ -129,6 +133,7 @@ def clubdashboardView(request, pk):
         profile = request.user.profile
     else:
         profile = None
+
     club = Club.objects.get(id=pk)
     usersClubs = [
         clubrelationship.club for clubrelationship in request.user.profile.clubprofilerelationship_set.all()]
@@ -138,13 +143,16 @@ def clubdashboardView(request, pk):
     events = club.event_set.all()[:7]
     posts = club.post_set.all()[:7]
     updates = club.update_set.all()[:7]
-    members = club.clubprofilerelationship_set.all()
+    members = [
+        (relationship.profile, relationship) for relationship in club.clubprofilerelationship_set.all()]
     info = club.get_club_info()
     if request.method == 'POST':
         form_type = request.POST.get("form_type")
         form = None
 
-        if form_type == "club_event":
+        if form_type == "club":
+            form = ClubForm(request.POST, instance=club)
+        elif form_type == "club_event":
             form = EventForm(request.POST)
         elif form_type == "club_post":
             form = PostForm(request.POST)
@@ -161,10 +169,12 @@ def clubdashboardView(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, f'Form saved')
-            return HttpResponseRedirect('clubs/' + pk + '/')
+
+            return redirect('home')
 
             # return redirect('club')
     # else:
+    club_form = ClubForm(instance=club)
     event_form = EventForm(initial={
         'club': club,
         'author': request.user.profile
@@ -197,6 +207,7 @@ def clubdashboardView(request, pk):
         'members': members,
         'info': info,
 
+        'club_form': club_form,
         'event_form': event_form,
         'post_form': post_form,
         'update_form': update_form,

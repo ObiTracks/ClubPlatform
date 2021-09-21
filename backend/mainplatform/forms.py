@@ -34,7 +34,7 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = "__all__"
-        exclude = ('clubs',)
+        exclude = ('user',)
 
 
 # Club, event, post and update forms

@@ -3,8 +3,9 @@
 <div class="navbar">
     <div>
         <div class="card_font_large">
+
             {% if club %}
-            {{club.name}}
+            <div id="pageTitle" onclick="showForm('clubForm')">{{club.name}}</div>
             {% else %}
             ClubPlatform
             {% endif %}

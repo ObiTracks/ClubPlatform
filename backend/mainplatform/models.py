@@ -3,6 +3,8 @@ from django.db import models
 from django.db.models.deletion import CASCADE, SET_NULL, DO_NOTHING
 from django.contrib.auth.models import User
 from django.dispatch import receiver
+
+import re
 # Create your models here.
 
 
@@ -39,17 +41,40 @@ class Club(models.Model):
     objectives = models.TextField(max_length=1000, blank=True)
     description = models.TextField(max_length=1000, blank=True)
     history = models.TextField(max_length=1000, blank=True)
+    # Link to only to one discord server
+    # The admin of the server must get the server ID from the widget tab in the server settings
     discord_link = models.CharField(max_length=1000, blank=True)
     slack_link = models.CharField(max_length=1000, blank=True)
     facebook_link = models.CharField(max_length=1000, blank=True)
-    instagram_link = models.CharField(max_length=1000, blank=True)
     twitter_link = models.CharField(max_length=1000, blank=True)
+    # Ex. https://www.instagram.com/laurier.cs/
+    instagram_link = models.CharField(max_length=1000, blank=True)
     linkedin_link = models.CharField(max_length=1000, blank=True)
+    # Provide the email address for the calendar they want shared
     shared_calendar_link = models.CharField(max_length=1000, blank=True)
     date_created = models.DateTimeField(auto_now=True)  # Autoadd field
 
+    def save(self, *args, **kwargs):
+        # Parsing the facebook link
+        if len(self.facebook_link.split("/")) != 1:
+            list = self.facebook_link.split("/")
+            list = [x for x in list if x != ""]
+            self.facebook_link = list[-1]
+
+        # Parsing the twitter link
+        if len(self.twitter_link.split("/")) != 1:
+            list = self.twitter_link.split("/")
+            list = [x for x in list if x != ""]
+            self.twitter_link = list[-1]
+
+        if "%40" not in self.shared_calendar_link.split("/"):
+            self.shared_calendar_link = self.shared_calendar_link.replace(
+                "@", '%40')
+
+        super().save(*args, **kwargs)
+
     def get_total_members(self):
-        return self.profile_set.count()
+        return self.clubprofilerelationship_set.count()
 
     def get_total_posts(self):
         return self.post_set.count()
@@ -160,7 +185,7 @@ class Event(models.Model):
     )
     image = models.ImageField(default=None, blank=True)
     title = models.CharField(max_length=100)
-    date = models.DateTimeField(blank=True, default=None)
+    # date = models.DateTimeField(blank=True, default=None)
     short_description = models.TextField(max_length=1000)
     long_description = models.TextField(max_length=1000, blank=True)
     location = models.CharField(
@@ -205,8 +230,6 @@ class Update(models.Model):
         ordering = ['-date_created']
 
     club = models.ForeignKey(Club, on_delete=models.CASCADE, default=None)
-    event = models.ForeignKey(
-        Event, on_delete=models.CASCADE, default=None, blank=True)
     author = models.ForeignKey(Profile, on_delete=models.CASCADE, default=None)
 
     PRIORITY_LEVEL = (

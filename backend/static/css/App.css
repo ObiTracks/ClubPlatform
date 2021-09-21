@@ -20,11 +20,8 @@ a {
 }
 
 .background_purple_animated {
-  background: -webkit-gradient(linear, left top, right top, from(#00b7ee), color-stop(#0865f0), to(#ae00ff));
-  background: linear-gradient(to right, #00b7ee, #0865f0, #ae00ff);
-  background-size: 500% 500%;
-  -webkit-animation: AnimationName 3s ease infinite;
-  animation: AnimationName 3s ease infinite;
+  background: -webkit-gradient(linear, left top, right bottom, from(#00b7ee), to(#ae00ff));
+  background: linear-gradient(to bottom right, #00b7ee, #ae00ff);
 }
 
 @-webkit-keyframes AnimationName {
@@ -54,11 +51,12 @@ a {
 /* width */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  margin: 30px 0;
+  margin: 30px 30px;
 }
 
 /* Handle */
@@ -69,7 +67,7 @@ a {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #b30000;
+  background: #760094;
 }
 
 .paragraph_font {
@@ -79,7 +77,7 @@ a {
 }
 
 .paragraph_font_large {
-  font: 14px Poppins;
+  font: 12px Poppins;
   font-weight: 600;
   color: white;
 }
@@ -146,7 +144,7 @@ a {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding-top: 40px;
+  padding: 40px 2%;
 }
 
 .bodyGrid {
@@ -154,15 +152,24 @@ a {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  width: 90%;
-  max-width: 1500px;
+  width: 100%;
+  min-width: none;
+  max-width: 1600px;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: minmax(auto, 1fr) 1.5fr minmax(auto, 1fr);
-      grid-template-columns: minmax(auto, 1fr) 1.5fr minmax(auto, 1fr);
-  -ms-grid-rows: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
+  -ms-grid-columns: minmax(auto, 2fr) 5fr minmax(auto, 2fr);
+      grid-template-columns: minmax(auto, 2fr) 5fr minmax(auto, 2fr);
+  -ms-grid-rows: 1fr "toprow" 1fr 1fr;
+      grid-template-rows: 1fr "toprow" 1fr 1fr;
   grid-gap: 30px;
+      grid-template-areas: "topRow topRow topRow" "leftColumn middleColumn rightColumn";
+}
+
+.bodyGrid .topRow {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: topRow;
 }
 
 .bodyGrid .bottomColumn {
@@ -230,27 +237,75 @@ a {
   position: relative;
   width: 100%;
   max-width: 100%;
-  min-height: 100px;
+  min-height: 40vh;
   max-height: 60vh;
-  padding: 15px;
+  padding: 12px;
   border-radius: 35px;
   background: -webkit-gradient(linear, left top, right bottom, from(#34373e), to(#34373e));
   background: linear-gradient(to bottom right, #34373e, #34373e);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   overflow: auto;
 }
 
 .genericCard > div:nth-child(2).listView {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.activityCard {
+  position: relative;
+  width: 100%;
+  min-width: 300px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.activityCard > * {
+  position: relative;
+  width: 100%;
+}
+
+.activityCard > div:nth-child(2) {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: 50px;
+  padding: 4px;
+  border-radius: 35px;
+  background: -webkit-gradient(linear, left top, right bottom, from(#34373e), to(#34373e));
+  background: linear-gradient(to bottom right, #34373e, #34373e);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  overflow: auto;
+}
+
+.activityCard > div:nth-child(2).listView {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
@@ -312,7 +367,8 @@ a {
 
 .smallStrip .container .header .title,
 .smallStrip .container .header .date-time {
-  font: 15px Montserrat;
+  font-size: 13px;
+  font-family: 'Poppins', sans-serif;
   font-weight: 700;
   background: -webkit-linear-gradient(0deg, #08F0E2, #FFA6F6);
   -webkit-background-clip: text;
@@ -373,9 +429,10 @@ a {
           align-items: center;
   width: 100%;
   margin-bottom: 20px;
+  margin-right: 15px;
   border-radius: 30px;
-  background-image: -webkit-gradient(linear, left bottom, left top, from(#a18cd1), to(#fbc2eb));
-  background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+  background: -webkit-gradient(linear, left top, right bottom, from(#00b7ee), to(#9200be));
+  background: linear-gradient(to bottom right, #00b7ee, #9200be);
   padding: 10px 30px;
 }
 
@@ -744,6 +801,16 @@ a {
           align-items: center;
 }
 
+.navbar > div:nth-child(1) #pageTitle {
+  background: -webkit-linear-gradient(0deg, #08F0E2, #FFA6F6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.navbar > div:nth-child(1) #pageTitle:hover {
+  cursor: pointer;
+}
+
 .navbar > div:nth-child(2) {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -770,7 +837,7 @@ a {
 }
 
 .menu {
-  width: 85px;
+  width: 70px;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -800,7 +867,7 @@ a {
   position: fixed;
   z-index: -1;
   top: 0;
-  left: 84px;
+  left: 70px;
   width: 350px;
   height: 100vh;
   -webkit-backdrop-filter: blur(5px);
@@ -1145,11 +1212,22 @@ table {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  border: 3px solid color;
 }
 
 table tr,
 table th,
 table td {
+  font: 14px Poppins;
+  font-weight: 500;
   color: white;
+}
+
+table th {
+  border-bottom: solid white 3px;
+}
+
+table tr {
+  font-weight: 700;
 }
 /*# sourceMappingURL=App.css.map */
