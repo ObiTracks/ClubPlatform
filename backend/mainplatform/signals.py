@@ -11,9 +11,9 @@ def create_profile(sender, instance, created, **kwargs):
             user=instance, first_name=instance.first_name, last_name=instance.last_name)
 
 
-@receiver(post_save, sender=User)
-def save_profile(sender, instance, **kwargs):
-    instance.profile.save()
+# @receiver(post_save, sender=User)
+# def save_profile(sender, instance, **kwargs):
+#     instance.profile.save()
 
 
 # This signal creates a relationship between a club and school
@@ -28,11 +28,10 @@ def save_club_school_relationship(sender, instance, **kwargs):
         relationship.save()
 
 
-@receiver(post_save, sender=Club)
-def save_club_profile_relationship(sender, instance, **kwargs):
-    print("New club added")
-    if instance.owner == None:
-        print("Club Relationship creaed")
-        ClubProfileRelationship.objects.create(
-            club=instance, owner=request.user.profile)
-        relationship.save()
+# @receiver(post_save, sender=Club)
+# def save_club_profile_relationship(sender, instance, **kwargs):
+#     print("Created new club, Allo mat")
+#     print("Club Relationship created")
+#     relationship = ClubProfileRelationship.objects.create(
+#         club=instance, owner=request.user.profile)
+#     relationship.save()

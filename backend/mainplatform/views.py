@@ -77,6 +77,7 @@ def landingpageView(request):
 def homedashboardView(request):
     usersClubs = [
         clubrelationship.club for clubrelationship in request.user.profile.clubprofilerelationship_set.all()]
+    print(usersClubs)
     allClubs = Club.objects.all()
 
     if request.method == 'POST':
@@ -89,14 +90,7 @@ def homedashboardView(request):
             form = ProfileUpdateForm(
                 request.POST, instance=request.user.profile)
 
-        if form.is_valid() and form_type != "profile":
-            club = form.save()
-            ClubProfileRelationship.objects.create(
-                club=club, profile=request.user.profile, is_owner=True, post_privledges=True).save()
-            print("Option A - Club Relationship added  ")
-            return redirect('home')
-        elif form.is_valid():
-            print("Option B")
+        if form.is_valid():
             form.save()
             return redirect('home')
         else:

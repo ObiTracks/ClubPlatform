@@ -26,15 +26,12 @@ for model in models:
 class ClubModelAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.save()
-        print("New club added")
 
-        if obj.owner == None:
+        if not ClubProfileRelationship.objects.filter(profile=request.user.profile).filter(club=obj):
             relationship = ClubProfileRelationship.objects.create(
-                club=obj, owner=request.user.profile)
+                club=obj, profile=request.user.profile, post_privledges=True, is_owner=True, role="P")
             relationship.save()
-            print("Club Relationship creaed")
-            # pre save stuff here
-        # post save stuff here
+            print("Club Relationship created")
 
 
 admin.site.register(Club, ClubModelAdmin)

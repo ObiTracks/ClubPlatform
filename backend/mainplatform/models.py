@@ -31,7 +31,7 @@ class Club(models.Model):
 
     name = models.CharField(max_length=100)
     abv = models.CharField(max_length=4, blank=True)
-    image = models.ImageField(default=None, blank=True)
+    image = models.ImageField(upload_to='images/', default=None, blank=True)
 
     email = models.CharField(max_length=60)
     # president = models.ForeignKey(to, on_delete)
@@ -131,6 +131,8 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=40)
     year_level = models.CharField(
         max_length=40, choices=YEAR_LEVEL, default='M')
+    image = models.ImageField(
+        upload_to='images/', default=None, null=True, blank=True)
 
     date_created = models.DateTimeField(auto_now=True)
 
@@ -183,7 +185,7 @@ class Event(models.Model):
         ('IP', 'In-Person'),
         ('R', 'Remote'),
     )
-    image = models.ImageField(default=None, blank=True)
+    image = models.ImageField(upload_to='images/', default=None, blank=True)
     title = models.CharField(max_length=100)
     # date = models.DateTimeField(blank=True, default=None)
     short_description = models.TextField(max_length=1000)
@@ -212,7 +214,7 @@ class Post(models.Model):
         ('IP', 'In-Person'),
         ('R', 'Remote'),
     )
-    image = models.ImageField(default=None, blank=True)
+    image = models.ImageField(upload_to='images/', default=None, blank=True)
     title = models.CharField(max_length=100)
     short_description = models.CharField(max_length=100, blank=True)
     long_description = models.CharField(max_length=100, blank=True)

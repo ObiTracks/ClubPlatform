@@ -95,7 +95,18 @@
         {% for child in item %} 
           {% if title == "Events"%} 
             {% include 'components/StripSmall.html' with style="purpleborder" title=child.title timestamp=child.date content=child.short_description%} 
+            {% include 'components/StripSmall.html' with style="purpleborder" title=child.title timestamp=child.date content=child.short_description%} 
+            {% include 'components/StripSmall.html' with style="purpleborder" title=child.title timestamp=child.date content=child.short_description%} 
+            {% include 'components/StripSmall.html' with style="purpleborder" title=child.title timestamp=child.date content=child.short_description%} 
+            {% include 'components/StripSmall.html' with style="purpleborder" title=child.title timestamp=child.date content=child.short_description%} 
+            {% include 'components/StripSmall.html' with style="purpleborder" title=child.title timestamp=child.date content=child.short_description%} 
+            {% include 'components/StripSmall.html' with style="purpleborder" title=child.title timestamp=child.date content=child.short_description%} 
+            {% include 'components/StripSmall.html' with style="purpleborder" title=child.title timestamp=child.date content=child.short_description%} 
+            {% include 'components/StripSmall.html' with style="purpleborder" title=child.title timestamp=child.date content=child.short_description%} 
+            {% include 'components/StripSmall.html' with style="purpleborder" title=child.title timestamp=child.date content=child.short_description%} 
           {% elif title == "Posts" %} 
+            {% include 'components/StripLarge.html' with title=child.title timestamp=child.time content=child.short_description%} 
+            {% include 'components/StripLarge.html' with title=child.title timestamp=child.time content=child.short_description%} 
             {% include 'components/StripLarge.html' with title=child.title timestamp=child.time content=child.short_description%} 
           {% else %}
             {% include 'components/StripSmall.html' with title=child.title timestamp=child.date content=child.short_description%}

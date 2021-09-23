@@ -1,15 +1,15 @@
 {% load static %}
 
-{% if style == "purpleborder" %}
+{% comment %} {% if style == "purpleborder" %}
 <a href="#" class="update_border background_purple_animated">
-{% else %}
+{% else %} {% endcomment %}
 <a href="#" class="update_border">
-{% endif %}
+{% comment %} {% endif %} {% endcomment %}
     <div class="smallStrip">
         <div class="container">
-            <div class="header">
-                <div class="title">{{title}}</div>
-                <div class="date-time">{{timestamp}}</div>
+            <div class="header title_font">
+                <div class="title title_font">{{title}}</div>
+                <div class="date-time title_font">{{timestamp}}</div>
             </div>
             <div class="body paragraph_font_large">
                 {{content}}

@@ -5,12 +5,17 @@
         {% for notCurrentClub in usersClubs %}
             {% if notCurrentClub.name == club.name %}
                 <button class="icon icon-1" id="currentClubIcon" onclick="showMenu()">
-                    {{club.name}}
-                    <img src="" alt="" />
+                    {{club.abv}}
+                    {% if club.image %}
+                        <img src="{{club.image.url}}" alt="" />
+                    {% endif %}
                 </button>
             {% else %}
-                <button class="icon icon-2" onclick="window.location='{% url 'club' notCurrentClub.id %}';">
-                    {{notCurrentClub.name}}
+                    <button class="icon icon-2" onclick="window.location='{% url 'club' notCurrentClub.id %}';">
+                    {{notCurrentClub.abv}}
+                    {% if notCurrentClub.image %}
+                        <img src="{{notCurrentClub.image.url}}" alt="" />
+                    {% endif %}
                 </button>
             {% endif %}
         {% endfor %}

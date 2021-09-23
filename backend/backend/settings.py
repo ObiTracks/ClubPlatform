@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'mainplatform',
-    ]
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -121,14 +121,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/images/'
+MEDIA_URL = '/media/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+STATIC_ROOT = os.path.join(BASE_DIR, 'media')
 
 # CORS_ORIGIN_WHITELIST = [
 #      'http://localhost:3000'
 # ]
-CORS_ORIGIN_ALLOW_ALL = True #Remove for production
-
+CORS_ORIGIN_ALLOW_ALL = True  # Remove for production
