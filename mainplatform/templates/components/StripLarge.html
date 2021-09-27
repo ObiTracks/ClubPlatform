@@ -1,0 +1,19 @@
+{% load static %}
+
+{% comment %} <a href="#" class="fullWidth"> {% endcomment %}
+    <div class="largeStrip" tabindex="1" href="/">
+        {% comment %} {% include 'components/Badge.html' with type="info" title="Date" value=timestamp%} {% endcomment %}
+
+        {% if item.image %}
+        <img src="{{ item.image.url }}" alt="">
+       {% endif %}
+       {% comment %} include the badge here for date an time {% endcomment %}
+       <div class="title title_font ">{{item.title}}</div>
+       <div class="caption paragraph_font_large">{{item.short_description}} Caption</div>
+       <div class="badge">
+        {% include 'components/Badge.html' with type="info" title="Date" value=item.date_created %}
+        </div>
+       <div class="content paragraph_font">
+       {{item.long_description}}</div>
+    </div>
+{% comment %} </a> {% endcomment %}

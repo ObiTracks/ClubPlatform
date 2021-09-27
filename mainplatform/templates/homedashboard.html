@@ -1,0 +1,46 @@
+{% extends "dashboardbase.html" %}
+{% load static %}
+
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/App.css' %}">
+<title>Home Dashboard</title>
+{% endblock %}
+
+{% block dashboardArea %}
+
+{% for club in users_clubs %}
+Hello Club
+{% endfor %}
+
+<div class="sectionsContainer">
+    <div class="section_font_title">Your Clubs</div>
+    <div class="objectContainer clubActivities">
+
+        <button class="formButton" id="showFormBtn" onclick="showForm('clubForm')">Create Your Own Club</button>
+
+        {% if usersClubs %}
+            {% for club in usersClubs %}
+            {% comment %} <a href="{% url 'club' club.id %}" style="background: red;"> {% endcomment %}
+                {% include 'components/Card.html' with title=club.name type="club" item=club %}
+            {% comment %} </a> {% endcomment %}
+            {% endfor %}
+        {% else %}
+            <div class="paragraph_font_large">Your not a part of any clubs, so join or make one!</div>
+        {% endif %}
+
+    </div>
+    
+    <div class="section_font_title">All Clubs</div>
+    <div class="objectContainer clubList">
+        {% if allClubs %}
+            {% for club in allClubs %}
+                {% include 'components/Badge.html' with type="club" value=club.name%}
+            {% endfor %}
+        {% else %}
+            <div class="paragraph_font_large">Nothing To Show Here So Create Your Own Club!</div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% load static %}
+
+<div class="navbar">
+    <div>
+        <div class="card_font_large">
+
+            {% if club and clubrelationship.post_privledges == True %}
+            <div id="pageTitle" onclick="showForm('clubForm')">{{club.name}}</div>
+            {% elif club%}
+            <div id="">{{club.name}}</div>
+            {% else %}
+            ClubPlatform
+            {% endif %}
+        </div>
+    </div>
+
+    <div>
+        <input class="searchBar" type="text" id="s-bar" name="searchbar" class="searchbar" placeholder="Search here" />
+    </div>
+    <div>
+        {% include 'components/ProfileTab.html' with name=profile.first_name role=profile %}
+    </div>
+</div>

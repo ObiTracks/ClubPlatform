@@ -1,0 +1,122 @@
+{% load static %}
+
+<div class="genericCard"> 
+
+  <div class="card_font_large">
+    {{title}}
+
+    {% if clubrelationship.post_privledges == True %}
+      {% if title == 'Events' %}
+        <button class="formButton" id="showFormBtn" onclick="showForm('eventForm')">Create Event+</button>
+      {% elif title == 'Posts' %}
+        <button class="formButton" id="showFormBtn" onclick="showForm('postForm')">Create Post+</button>
+      {% elif title == 'Updates' %}
+        <button class="formButton" id="showFormBtn" onclick="showForm('updateForm')">Create Update+</button>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  {% if type == "List" %}
+    <div class="listView">
+  {% elif title == "Posts" %}
+    <div class="spectrum-background"> 
+  {% elif type == 'club'%}
+    <div class="clubActivityCard" onclick="window.location='{% url 'club' club.id %}';"> 
+  {% else %}
+  <div>
+  {% endif %}
+
+  {% if type == 'table'%} 
+    {% include 'components/Table.html' with item=members %} 
+  {% elif type == 'widget'%} 
+      {% if twittername %}
+          <a
+            class="twitter-timeline"
+            data-height="500"
+            data-theme="dark"
+            href="https://twitter.com/{{twittername}}?ref_src=twsrc%5Etfw"
+            >{{club.name}}</a>
+          <script
+            async
+            src="https://platform.twitter.com/widgets.js"
+            charset="utf-8"
+          ></script>
+
+      {% elif facebookpagename%}
+
+        <iframe
+          src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F{{facebookpagename}}&tabs=timeline%2Cevents%2Cmessages&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+          height="500"
+          tyle="border-radius: 25px; overflow: hidden;"
+          scrolling="yes"
+          frameborder="0"
+          allowfullscreen="true"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        ></iframe>
+
+        <div class="fb-page" data-href="https://www.facebook.com/lauriercs/" data-tabs="timeline, events, messages" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/lauriercs/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/lauriercs/">Laurier Computing Society</a></blockquote></div>
+      {% elif server_id%}
+          <iframe src="https://discord.com/widget?id={{server_id}}&&theme=dark" width="100%" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">Wtf</iframe>
+      {% elif shared_calendar_link%}
+          <iframe src="https://calendar.google.com/calendar/embed?src={{shared_calendar_link}}&ctz=America%2FToronto" style="width: 100%;" height="600" frameborder="0" scrolling="no"></iframe>
+      {% else %}
+
+          <div class="paragraph_font_large">Nothing To Show Here</div>
+      {% endif %} 
+    
+    {% elif title == "Club Info"%}
+      <div class="cardGrid">
+
+          <div class="socialLinks">
+            {% for key, value in social_links.items %}
+            <a class="paragraph_font_large" href={{value}}> {{key}}:  &nbsp;
+              <div class="paragraph_font_large gradient_font_background" >{{value}}</div>
+            </a>
+            {% endfor %}
+          </div>
+        {% for key, value in info.items %}
+          {% include 'components/Badge.html' with type="info" title=key value=value %}
+        {% endfor %}
+      </div>
+
+    {% elif type == 'club'%} 
+      {% with club as item %} 
+
+        {% comment %} For showing the recent events {% endcomment %}
+        {% if club.event_set.count > 0 %}
+          <div class="paragraph_font_large">Recent Events</div>
+          {% include 'components/StripSmall.html' with item=club.event_set.all.first%} 
+        {% endif %}
+
+        {% comment %} For showing the recent posts {% endcomment %}
+        {% if club.post_set.count > 0 %} 
+          <div class="paragraph_font_large">Recent Posts</div>
+          {% include 'components/StripSmall.html' with item=club.post_set.all.first%}
+        {% endif %} 
+
+        {% if club.post_set.count == 0 or club.event_set.count == 0 %}
+            <div class="paragraph_font_large">Nothing To Show Here</div>
+        {% endif %} 
+      {% endwith %} 
+    {% elif type == 'List'%}
+        {% for object in item %}
+          {% include 'components/ListItem.html' with title=object.title date=object.date short_description=object.short_description long_description=object.long_description %}
+        {% endfor %}
+    {% else %} 
+      {% if item %}
+        {% for child in item %} 
+          {% if title == "Events"%} 
+            {% include 'components/StripSmall.html' with style="purpleborder" type="Events" item=child%} 
+          {% elif title == "Posts" %} 
+            {% include 'components/StripLarge.html' with item=child %} 
+          {% else %}
+            {% include 'components/StripSmall.html' with title=child.title timestamp=child.date caption=child.short_description%}
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        <div class="paragraph_font_large">Nothing To Show Here</div>
+      {% endif %}
+      
+    {% endif %}
+  </div>
+</div>

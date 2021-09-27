@@ -1,0 +1,34 @@
+{% load static %}
+
+{% comment %} {% if style == "purpleborder" %}
+<a href="#" class="update_border background_purple_animated">
+{% else %} {% endcomment %}
+<a href="{{item.url}}" style="margin-bottom: 15px">
+{% comment %} {% endif %} {% endcomment %}
+    {% if type == "Events" %}
+        <button class="deleteButton" 
+        onclick="confirm('Are you sure you want to delete this item?'); window.location='{% url 'delete' type="Event" pk=item.id %}';">
+        X
+        </button>
+
+    {% endif %}
+    
+
+    <div class="smallStrip">
+        <div class="container">
+            <div class="header title_font">
+                <div class="title title_font">{{item.title}}</div>
+                <div class="date-time title_font">{{item.date }}</div>
+            </div>
+            <div class="body paragraph_font_large">
+                {{item.short_description}}
+            </div>
+        </div>
+
+        {% if item.image %}
+        <img src="{{item.image.url}}" alt="" class="thumbnail" />
+        {% else %}
+        <img src="https://source.unsplash.com/collection/9613967/" alt="" class="thumbnail" />
+        {% endif %}
+    </div>
+</a>
