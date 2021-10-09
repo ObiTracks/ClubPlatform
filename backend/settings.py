@@ -20,10 +20,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '14c9mfbl*+fxx9csz=a)g_7q_@2)+kw$!k5uv$7zuvk(*mip+a'
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY', '14c9mfbl*+fxx9csz=a)g_7q_@2)+kw$!k5uv$7zuvk(*mip+a')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+
 
 ALLOWED_HOSTS = []
 
@@ -120,15 +123,26 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# STATIC_URL = '/static/'
+# MEDIA_URL = '/images/'
 
-MEDIA_URL = '/media/'
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+# ]
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
+
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_assets')
 # CORS_ORIGIN_WHITELIST = [
 #      'http://localhost:3000'
 # ]
-CORS_ORIGIN_ALLOW_ALL = True  # Remove for production
+# CORS_ORIGIN_ALLOW_ALL = True  # Remove for production

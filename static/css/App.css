@@ -1145,45 +1145,6 @@ iframe {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.modal .formComponent > * {
-  margin-bottom: 10px;
-  min-height: 45px;
-}
-
-.modal .formComponent label {
-  width: 100%;
-  height: 25px;
-}
-
-.modal .formComponent input,
-.modal .formComponent select,
-.modal .formComponent textarea {
-  width: 100%;
-  border: solid #0865f0;
-  border-radius: 10px;
-  background: none;
-  color: #dbdbdb;
-  outline: none;
-  padding: 10px;
-  font: 13px Poppins;
-  font-weight: 400;
-  color: white;
-}
-
-.modal .formComponent input:focus,
-.modal .formComponent select:focus,
-.modal .formComponent textarea:focus {
-  border: solid #3d85f0;
-  outline: none;
-}
-
-.modal .formComponent textarea {
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  min-height: 200px;
-}
-
 button {
   position: relative;
   height: -webkit-fit-content;
