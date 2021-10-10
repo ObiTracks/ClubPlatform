@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 import environ
+import django_heroku
 from pathlib import Path
 
 # Environment variables configuration. The how to link is here:
@@ -60,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -156,3 +158,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media_assets')
 #      'http://localhost:3000'
 # ]
 # CORS_ORIGIN_ALLOW_ALL = True  # Remove for production
+
+
+django_heroku.settings(locals())
