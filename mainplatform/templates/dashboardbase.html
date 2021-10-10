@@ -35,7 +35,7 @@
 
   <div class="modal" id="formModal">
 
-      <form action="" method="POST" class="formComponent"  id="clubUpdateForm">
+      <form action="" method="POST" class="formComponent"  id="clubUpdateForm" enctype="multipart/form-data">
         {% csrf_token %}
         {{event_form}}
         <input type="hidden" name="form_type" value="club_event">

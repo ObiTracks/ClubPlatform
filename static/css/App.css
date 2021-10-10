@@ -719,6 +719,7 @@ iframe {
 
 .icon img {
   width: 100%;
+  height: 100%;
   border-radius: 50%;
   position: absolute;
   overflow: hidden;
@@ -1143,6 +1144,44 @@ iframe {
   background: linear-gradient(to bottom right, #34373e, #34373e);
   border-radius: 20px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.modal .formComponent label {
+  width: 100%;
+  height: 10px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: 5px 0 5px 0;
+}
+
+.modal .formComponent input,
+.modal .formComponent select,
+.modal .formComponent textarea {
+  width: 100%;
+  border: solid #0865f0;
+  border-radius: 10px;
+  background: none;
+  color: #dbdbdb;
+  outline: none;
+  padding: 10px;
+  font: 13px Poppins;
+  font-weight: 400;
+  color: white;
+}
+
+.modal .formComponent input:focus,
+.modal .formComponent select:focus,
+.modal .formComponent textarea:focus {
+  border: solid #3d85f0;
+  outline: none;
+}
+
+.modal .formComponent textarea {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  min-height: 200px;
 }
 
 button {
