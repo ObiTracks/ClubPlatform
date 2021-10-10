@@ -85,12 +85,17 @@ def homedashboardView(request):
         form = None
 
         if form_type == "club":
-            form = ClubForm(request.POST)
+            form = ClubForm(request.POST, request.FILES)
         elif form_type == "profile":
             form = ProfileUpdateForm(
-                request.POST, instance=request.user.profile)
+                request.POST, request.FILES, instance=request.user.profile)
 
         if form.is_valid():
+            subject = form.cleaned_data
+            print("*******CLEANED DATA********")
+            print(subject)
+            print("*******CLEANED DATA********")
+
             obj = form.save()
             if form_type == "club":
                 relationship = ClubProfileRelationship(
@@ -151,16 +156,16 @@ def clubdashboardView(request, pk):
         form = None
 
         if form_type == "club":
-            form = ClubForm(request.POST, instance=club)
+            form = ClubForm(request.POST, request.FILES, instance=club)
         elif form_type == "club_event":
-            form = EventForm(request.POST)
+            form = EventForm(request.POST, request.FILES)
         elif form_type == "club_post":
-            form = PostForm(request.POST)
+            form = PostForm(request.POST, request.FILES)
         elif form_type == "club_update":
-            form = UpdateForm(request.POST)
+            form = UpdateForm(request.POST, request.FILES)
         elif form_type == "profile":
             form = ProfileUpdateForm(
-                request.POST, instance=request.user.profile)
+                request.POST, request.FILES, instance=request.user.profile)
             print("Profile form used")
             # prod.image = request.FILES['image']
         elif form_type == "club_relationship":
@@ -168,6 +173,10 @@ def clubdashboardView(request, pk):
                 form = ClubProfileRelationshipForm(request.POST)
 
         if form.is_valid():
+            subject = form.cleaned_data
+            print("*******CLEANED DATA********")
+            print(subject)
+            print("*******CLEANED DATA********")
             obj = form.save(commit=False)
             if form_type == "club_relationship":
                 obj.profile = profile

@@ -44,16 +44,16 @@
         <button class="paragraph_font background_purple_animated">Submit</button>
       </form>
 
-      <form action="" method="POST" class="formComponent"  id="eventForm">
+      <form action="" method="POST" class="formComponent"  id="eventForm" enctype="multipart/form-data">
         {% csrf_token %}
         {{event_form}}
-        <input type="hidden" name="form_type" value="club_event">
+        <input type="hidden" name="form_type" value="club_event" >
         {% comment %} <input type="text" placeholder="placeholder" class="paragraph_font"> {% endcomment %}
 
         <button class="paragraph_font background_purple_animated">Submit</button>
       </form>
 
-      <form action="" method="POST" class="formComponent" id="postForm">>
+      <form action="" method="POST" class="formComponent" id="postForm" enctype="multipart/form-data">
         {% csrf_token %}
         {{post_form}}
         <input type="hidden" name="form_type" value="club_post">
@@ -62,7 +62,7 @@
         <button class="paragraph_font background_purple_animated">Submit</button>
       </form>
       
-      <form action="" method="POST" class="formComponent" id="updateForm">
+      <form action="" method="POST" class="formComponent" id="updateForm" enctype="multipart/form-data">
         {% csrf_token %}
         {{update_form}}
         <input type="hidden" name="form_type" value="club_update">
@@ -72,9 +72,9 @@
       </form>
 
       <form action="" method="POST" class="formComponent" id="profileForm" enctype="multipart/form-data">
-      
-        <a href={% url 'logout' %} class="paragraph_font" style="color: white; position: absolute; top: 20px; right: 20px;">Logout</a>
         {% csrf_token %}
+        <a href={% url 'logout' %} class="paragraph_font" style="color: white; position: absolute; top: 20px; right: 20px;">Logout</a>
+        
         {{profile_form}}
         <input type="hidden" name="form_type" value="profile">
         {% comment %} <input type="text" placeholder="placeholder" class="paragraph_font"> {% endcomment %}
@@ -82,7 +82,7 @@
         <button class="paragraph_font background_purple_animated">Submit</button>
       </form>
 
-      <form action="" method="POST" class="formComponent" id="clubForm">
+      <form action="" method="POST" class="formComponent" id="clubForm" enctype="multipart/form-data">
         <a href={% url 'logout' %} class="paragraph_font" style="color: white; position: absolute; top: 20px; right: 20px;">Logout</a>
         {% csrf_token %}
         {{club_form}}
@@ -92,7 +92,7 @@
         <button class="paragraph_font background_purple_animated">Submit</button>
       </form>
 
-      <form action="" method="POST" class="formComponent" id="clubrelationshipForm">
+      <form action="" method="POST" class="formComponent" id="clubrelationshipForm" enctype="multipart/form-data">
         <a href={% url 'logout' %} class="paragraph_font" style="color: white; position: absolute; top: 20px; right: 20px;">Logout</a>
         {% csrf_token %}
         {{clubprofilerelationship_form}}

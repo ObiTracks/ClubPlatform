@@ -1,1 +1,256 @@
-/* No CSS *//*# sourceMappingURL=Index.css.map */
+@import url("https://fonts.googleapis.com/css?family=Mulish:700,800|Lato:700,800,900|Poppins:700,500,600|Staatliches:400|Inter:400,500,600,700,800");
+body {
+  margin: 0;
+  padding: 0;
+  background: -webkit-gradient(linear, left top, left bottom, from(#22252C), to(#000000));
+  background: linear-gradient(#22252C, #000000);
+}
+
+.content {
+  width: 100%;
+  min-height: 100vh;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+nav {
+  top: 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font: 18px Poppins;
+  text-decoration: none;
+  color: white;
+}
+
+nav > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 0 5%;
+}
+
+.navdiv ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  list-style-type: none;
+}
+
+.navdiv ul li {
+  text-decoration: none;
+  margin: 10px;
+}
+
+.navdiv#navdiv-left {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.navdiv#navdiv-middle {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-flex: 6;
+      -ms-flex: 6;
+          flex: 6;
+}
+
+.navdiv#navdiv-right {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.grid {
+  display: -ms-grid;
+  display: grid;
+  min-height: 100vh;
+  -ms-grid-rows: (fit-content)[3];
+      grid-template-rows: repeat(3, -webkit-fit-content);
+      grid-template-rows: repeat(3, fit-content);
+  row-gap: 20px;
+  overflow: hidden;
+}
+
+.grid > div {
+  color: white;
+  /* background-color: green; */
+}
+
+.grid img {
+  width: 400px;
+}
+
+#firstSection {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-top: 10vh;
+  height: 120vh;
+}
+
+#firstSection > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-decoration: none;
+}
+
+#firstSection #hookLine {
+  width: 100%;
+  font: 250% Inter;
+  background: -webkit-linear-gradient(0deg, #08F0E2, #FFA6F6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#firstSection #backgroundMeet {
+  position: absolute;
+  top: 18%;
+  width: 100%;
+  font: 1100% Inter;
+  font-weight: 700;
+  color: #57585C;
+  letter-spacing: -8px;
+  background: -webkit-linear-gradient(90deg, #57585C, #22252C);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#firstSection #backgroundTitle {
+  position: absolute;
+  top: 70%;
+  width: 100%;
+  font: 1600% Lato;
+  font-weight: 800;
+  color: #57585C;
+  letter-spacing: -3px;
+  background: -webkit-linear-gradient(90deg, #57585C, #22252C);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#firstSection #foregroundTitle {
+  position: absolute;
+  top: 25%;
+  width: 100%;
+  font: 1300% Lato;
+  font-weight: 500;
+  color: #57585C;
+  letter-spacing: -3px;
+  background: -webkit-linear-gradient(0deg, #08F0E2, #FFA6F6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#firstSection #introImage {
+  position: absolute;
+  top: 50%;
+  width: 60%;
+}
+
+#secondSection {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-top: 15vh;
+  height: 120vh;
+}
+
+#secondSection #hookLine {
+  width: 70%;
+  font: 300% Inter;
+  background: -webkit-linear-gradient(0deg, #08F0E2, #FFA6F6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+#secondSection #content {
+  width: 60%;
+  font: 150% Inter;
+  color: #7797A1;
+  text-align: center;
+}
+
+#secondSection .integratedPlatforms {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#secondSection .integratedPlatforms > img {
+  width: 15%;
+  margin: 10px;
+}
+/*# sourceMappingURL=Index.css.map */

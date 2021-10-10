@@ -31,7 +31,7 @@ class Club(models.Model):
 
     name = models.CharField(max_length=100)
     abv = models.CharField(max_length=4, blank=True)
-    image = models.ImageField(upload_to='images/', default=None, blank=True)
+    image = models.ImageField(upload_to='images/', blank=True)
 
     email = models.CharField(max_length=60)
     # president = models.ForeignKey(to, on_delete)
@@ -194,9 +194,9 @@ class Event(models.Model):
         ('IP', 'In-Person'),
         ('R', 'Remote'),
     )
-    image = models.ImageField(upload_to='images/', default=None, blank=True)
+    image = models.ImageField(upload_to='images/', blank=True)
     title = models.CharField(max_length=100)
-    # date = models.DateTimeField(blank=True, default=None)
+    date = models.DateTimeField(blank=True, default=None, null=True)
     short_description = models.TextField(
         max_length=1000, verbose_name="caption")
     long_description = models.TextField(
@@ -225,7 +225,8 @@ class Post(models.Model):
         ('IP', 'In-Person'),
         ('R', 'Remote'),
     )
-    image = models.ImageField(upload_to='images/', default=None, blank=True)
+    date = models.DateTimeField(blank=True, default=None, null=True)
+    image = models.ImageField(upload_to='images/', blank=True)
     title = models.CharField(max_length=100)
     short_description = models.CharField(max_length=100, blank=True)
     long_description = models.CharField(max_length=100, blank=True)
@@ -251,7 +252,7 @@ class Update(models.Model):
         ('R', 'Regular'),
     )
     title = models.CharField(max_length=100)
-    date = models.DateTimeField(max_length=100, blank=True, null=True)
+    date = models.DateTimeField(blank=True, default=None)
     short_description = models.CharField(max_length=100)
     long_description = models.CharField(max_length=100, blank=True)
     url = models.CharField(max_length=1000, blank=True)
@@ -279,7 +280,7 @@ class Resource(models.Model):
     pod = models.ForeignKey(Pod, on_delete=models.CASCADE, default=None)
 
     title = models.CharField(max_length=100)
-    date = models.CharField(max_length=100, blank=True)
+    date = models.DateTimeField(blank=True, default=None)
     time = models.DateTimeField()
     url = models.CharField(max_length=1000)
     date_created = models.DateTimeField(auto_now=True)
