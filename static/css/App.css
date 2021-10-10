@@ -1,10 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Mulish:700,800|Lato:700|Poppins:700,500,600|Staatliches:400");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Rubik&display=swap");
-@font-face {
-  font-family: Ticker;
-  src: url("Subwayticker-3ZPz.otf");
-}
-
 * {
   margin: 0;
   -webkit-box-sizing: border-box;
