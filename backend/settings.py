@@ -34,7 +34,8 @@ DEBUG = env('DEBUG')
 # DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 
-ALLOWED_HOSTS = ['127.0.0.1', 'clubplatform.herokuapp.com', ]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1',
+                 '0.0.0.0', 'clubplatform.herokuapp.com', ]
 
 
 # Application definition
@@ -87,11 +88,14 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd7romiia4iqhke',
+        'HOST': 'ec2-18-211-194-36.compute-1.amazonaws.com',
+        'PORT': 5432,
+        'USER': 'yrkelxljungckb',
+        'PASSWORD': '94c8b4e9227196e1b2a455c7e5cbf5b08694d14c8f2fd91bef88ec2fcdf50799',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
